@@ -8,6 +8,5 @@ struct S_Details {
   uint256 amount;
   address ownerAddress;
   uint256 upVoteCount;
-  string ERC20Address;
   bool isActive;
 }
