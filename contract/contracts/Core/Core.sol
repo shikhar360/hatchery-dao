@@ -94,29 +94,26 @@ contract Core {
    function investAmount ( address _startupOwner) public payable onlyInvestors{   
     require(msg.value > 0 , " Invest More than 0");
     require(startupList[atIndex[_startupOwner]].amount != 0 , "Startup needs no money" );
+
     uint256 valToEth = msg.value / 10**18 ;
-   
-    if(startupList[atIndex[_startupOwner]].amount < valToEth) {
 
-       uint256 amtToTransfer = startupList[atIndex[_startupOwner]].amount * 10**18 ;
+    uint256 calc = startupList[atIndex[_startupOwner]].amount * 10**18 ;
+    
 
-       (bool callSuccess,) = payable(_startupOwner).call{value: amtToTransfer }("");
-       require(callSuccess,"Transfer Failed < amount"); 
-      
-       uint256 returnAccess = (valToEth - startupList[atIndex[_startupOwner]].amount) * 10**18 ;
-       (bool accessReturned,) = payable(_startupOwner).call{value: returnAccess}("");
-       require(accessReturned,"Access returning  Failed");  
-       
+    if(calc < msg.value) {
+
        startupList[atIndex[_startupOwner]].amount = 0;
        startupList[atIndex[_startupOwner]].isActive = false ;
 
     } else {
+       startupList[atIndex[_startupOwner]].amount -= valToEth ;
+
+    }
 
     uint restAmount = msg.value - (msg.value * interestRate/100);
     (bool callSuccess,) = payable(_startupOwner).call{value: restAmount}("");
     require(callSuccess,"Transfer Failed");
 
-    startupList[atIndex[_startupOwner]].amount -= valToEth ;
     startupList[atIndex[_startupOwner]].upVoteCount ++  ;
 
     totalInvested[msg.sender] += msg.value;
@@ -130,7 +127,6 @@ contract Core {
     pushIDX = _initial;
 
     }
-    }
 
    /*
    *@dev Function for changing the Interest Rates
@@ -140,11 +136,36 @@ contract Core {
      interestRate = _amt ;
    }
 
+   /*
+   *@dev Edit Functions for startup
+   */ 
+   function editName( string memory _name) external onlyStartupOwners {
+     require(startupList[atIndex[msg.sender]].isActive == true , "Cant edit Inactive Startups" );
+      startupList[atIndex[msg.sender]].name = _name;
+   }
+
+   function editTagline( string memory _tag) external onlyStartupOwners {
+    require(startupList[atIndex[msg.sender]].isActive == true , "Cant edit Inactive Startups" );
+      startupList[atIndex[msg.sender]].tagline = _tag;
+   }
    
+   function editDescription( string memory _des) external onlyStartupOwners {
+    require(startupList[atIndex[msg.sender]].isActive == true , "Cant edit Inactive Startups" );
+      startupList[atIndex[msg.sender]].description = _des;
+   }
+
+   function editAmount( uint256 _amt) external onlyStartupOwners {
+    require(startupList[atIndex[msg.sender]].isActive == true , "Cant edit Inactive Startups" );
+      startupList[atIndex[msg.sender]].amount = _amt;
+   }
+
+
 
    /*
    *@dev Getter functions
    */
+   
+   
     function getTotalInvested() external onlyValidInvestor view returns(uint256){
      return totalInvested[msg.sender];
     }
@@ -169,16 +190,16 @@ contract Core {
       return startupList[atIndex[msg.sender]].amount ; 
    }
    
-    function getVideoHash() external onlyStartupOwners view returns(string memory){
-        if (havePostedHash[msg.sender] == false){
+    function getVideoHash(address _addr) external onlyStartupOwners view returns(string memory){
+        if (havePostedHash[_addr] == false){
            revert NOT_UPLOADED_VIDEO_YET();
         }
 
-        return attachVideoHash[msg.sender];
+        return attachVideoHash[_addr];
     }
     
-    function getImageLink() external onlyStartupOwners view returns(string memory){
-        return imageLink[msg.sender] ;
+    function getImageLink( address _addr) external onlyStartupOwners view returns(string memory){
+        return imageLink[_addr] ;
     }
    
    
