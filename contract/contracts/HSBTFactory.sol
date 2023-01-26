@@ -16,6 +16,7 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
 
     string private startup_uri;
     string private investor_uri;
+    address public owner ;
 
     Counters.Counter private _tokenIdCounter;
 
@@ -26,6 +27,8 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
 
     constructor() ERC721("HatcherySBT", "HSBT") {
         _grantRole(OWNER_ROLE, msg.sender);
+        owner = msg.sender ;
+        hasAccessOf[msg.sender] = OWNER_ROLE ;
     }
 
     /*
@@ -69,6 +72,9 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
      return hasAccessOf[_operator] == OWNER_ROLE ? true : false;
    }
 
+   function getAddressOfOwner () external view returns(address){
+       return owner ;
+   }
 
    /*
    * @dev To withdraw the earnings 
@@ -76,6 +82,16 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
    function withdraw() external onlyRole(OWNER_ROLE) {
     (bool callSuccess,) = payable(msg.sender).call{value:address(this).balance}("");
     require(callSuccess,"Call failed");
+   }
+
+   /*
+   * @dev Change the Ownership
+   */
+
+   function changeOwnership (address _previousOwner , address _newOwner) external onlyRole(OWNER_ROLE){
+       _revokeRole(OWNER_ROLE , _previousOwner ) ;
+       owner = _newOwner ;
+       _grantRole(OWNER_ROLE , _newOwner);
    }
 
    /*
@@ -102,7 +118,7 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
     /*
     * @dev Incase member wants to leave the DAO
     */
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) onlyRole(OWNER_ROLE) {
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
 

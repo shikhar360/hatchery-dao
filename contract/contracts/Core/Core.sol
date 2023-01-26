@@ -12,6 +12,7 @@ error MUST_BE_STARTUP_OR_INVESTOR();
 error NOT_A_VALID_OWNER();
 error NOT_A_VALID_INVESTOR();
 error NOT_UPLOADED_VIDEO_YET();
+error ONLY_FOR_OWNERS_BRO();
 
 contract Core {
 
@@ -20,7 +21,8 @@ contract Core {
    uint private s_ID = 0;
    uint private i_ID = 0;
    uint256[] private pushIDX ;
-  
+   uint256 internal interestRate = 10;
+   
 
     constructor(address _address){
      sbtFactory = HatcherySBT(_address);
@@ -38,12 +40,13 @@ contract Core {
    mapping(address => uint256) internal totalFundsCollected;
    mapping(address => bool) internal isValidInvestor;
    mapping(address => bool) internal havePostedHash;
+   mapping(address => string) internal imageLink ;
 
    /*
    *@dev Adding startups to List
    */
    
-   function addStartupsToList ( string memory _name , string memory _descrip , string memory _tagline, uint256 _amt  ) external onlyStartupORInvestors {
+   function addStartupsToList ( string memory _name , string memory _descrip , string memory _tagline, uint256 _amt , string memory _imgLink ) external onlyStartupORInvestors {
    
     if(isAlreadyStartupOwner[msg.sender]){
         startupList[atIndex[msg.sender]].isActive = false ;
@@ -52,11 +55,15 @@ contract Core {
     startupList.push(S_Details( s_ID , _name , _descrip , _tagline , _amt , payable(msg.sender) , 0  , true ));
 
     atIndex[msg.sender] = s_ID ;
+
+    imageLink[msg.sender] = _imgLink ;
     
     isAlreadyStartupOwner[msg.sender] = true;
 
     s_ID ++ ;
    }
+   
+   
    
 
    /*
@@ -70,30 +77,70 @@ contract Core {
            revert BE_STARTUP_OWNER();
        }
     }
+    
+    function editImgLink (string memory _imgLink)external onlyStartupORInvestors {
+        if(isAlreadyStartupOwner[msg.sender] == true){
+            imageLink[msg.sender] = _imgLink ;
+        }else {
+        revert BE_STARTUP_OWNER();
+        }
 
+    }
    
    /*
    *@dev Adding Investments Function
    */
 
-   function investAmount ( address _startupOwner) public payable onlyInvestors{
-     
-    (bool callSuccess,) = payable(_startupOwner).call{value: msg.value}("");
-    require(callSuccess,"Transfer Failed");
+   function investAmount ( address _startupOwner) public payable onlyInvestors{   
+    require(msg.value > 0 , " Invest More than 0");
+    require(startupList[atIndex[_startupOwner]].amount != 0 , "Startup needs no money" );
     uint256 valToEth = msg.value / 10**18 ;
+   
+    if(startupList[atIndex[_startupOwner]].amount < valToEth) {
+
+       uint256 amtToTransfer = startupList[atIndex[_startupOwner]].amount * 10**18 ;
+
+       (bool callSuccess,) = payable(_startupOwner).call{value: amtToTransfer }("");
+       require(callSuccess,"Transfer Failed < amount"); 
+      
+       uint256 returnAccess = (valToEth - startupList[atIndex[_startupOwner]].amount) * 10**18 ;
+       (bool accessReturned,) = payable(_startupOwner).call{value: returnAccess}("");
+       require(accessReturned,"Access returning  Failed");  
+       
+       startupList[atIndex[_startupOwner]].amount = 0;
+       startupList[atIndex[_startupOwner]].isActive = false ;
+
+    } else {
+
+    uint restAmount = msg.value - (msg.value * interestRate/100);
+    (bool callSuccess,) = payable(_startupOwner).call{value: restAmount}("");
+    require(callSuccess,"Transfer Failed");
+
     startupList[atIndex[_startupOwner]].amount -= valToEth ;
     startupList[atIndex[_startupOwner]].upVoteCount ++  ;
+
     totalInvested[msg.sender] += msg.value;
     isValidInvestor[msg.sender] = true;
+
     pushIDX = investedToStartup[msg.sender];
     uint256 _id = startupList[atIndex[_startupOwner]].sID;
     pushIDX.push(_id);
     investedToStartup[msg.sender] = pushIDX ;
     uint256[] memory _initial;
     pushIDX = _initial;
-    
+
+    }
     }
 
+   /*
+   *@dev Function for changing the Interest Rates
+   */ 
+   function changeIntrestRate ( uint256 _amt) external onlyOwner {
+     require(_amt > 0 && _amt < 20 , "Intrest cant be Zero % and more than 20%");
+     interestRate = _amt ;
+   }
+
+   
 
    /*
    *@dev Getter functions
@@ -129,18 +176,39 @@ contract Core {
 
         return attachVideoHash[msg.sender];
     }
+    
+    function getImageLink() external onlyStartupOwners view returns(string memory){
+        return imageLink[msg.sender] ;
+    }
    
+   
+   function getOwnerAdd () external view returns (address){
+       return sbtFactory.getAddressOfOwner();
+   }
+   
+   function withdraw() external onlyOwner {
+    (bool callSuccess,) = payable(msg.sender).call{value:address(this).balance}("");
+    require(callSuccess,"Call failed");
+   }
 
    /*
    *@dev Modifiers
    */
+    modifier onlyOwner{
+    if (!(sbtFactory.isOwner(msg.sender) ) ){
+        revert ONLY_FOR_OWNERS_BRO();
+    }  
+    _;   
+    }
+   
+   
     modifier onlyStartup{
     if (!(sbtFactory.isStartup(msg.sender) ) ){
         revert YOU_HAVENT_BOUGHT_TOKEN();
     }  
     _;   
     }
-
+   
     modifier onlyStartupOwners{
     if (!(sbtFactory.isStartup(msg.sender) && isAlreadyStartupOwner[msg.sender] == true ) ){
         revert NOT_A_VALID_OWNER();
