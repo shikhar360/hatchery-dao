@@ -35,19 +35,19 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
     * @dev Buying a specific SBT for getting access to DAO
     */
     function mint(address to) public payable {
-        require(msg.value == 1 ether || msg.value == 2 ether , "PAY 1 or 2 ETHERS FOR GETTING ACCESS");
+        require(msg.value == 0.1 ether || msg.value == 0.2 ether , "PAY 0.1 or 0.2 ETHERS FOR GETTING ACCESS");
         uint256 tokenId = _tokenIdCounter.current();
         ownersID[msg.sender] = tokenId;
         _tokenIdCounter.increment();
 
-        if(msg.value == 1 ether){
+        if(msg.value == 0.1 ether){
         hasAccessOf[msg.sender] = STARTUP;   
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, startup_uri);
         }
         //--------------------------------------------
 
-        if(msg.value == 2 ether){
+        if(msg.value == 0.2 ether){
         hasAccessOf[msg.sender] = INVESTOR;       
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, investor_uri);

@@ -30,6 +30,9 @@ contract Exchange {
 
     }
 
+   /*
+   *@dev Buying the data with specific ID
+   */ 
     function buyData ( uint256 _idx) external payable onlyStartupORInvestors {
       require(msg.value == listingArr[_idx].amount * 10**18 , "Please Send correct AMOUNT");
 
@@ -45,6 +48,9 @@ contract Exchange {
 
     } 
     
+    /*
+   *@dev Getter functions
+   */ 
     function getAllBoughtData () external view returns(string[] memory) {
         return boughtData[msg.sender] ;
     }
@@ -66,6 +72,9 @@ contract Exchange {
     require(callSuccess,"Call failed");
     }
 
+    /*
+   *@dev Modifiers
+   */ 
     modifier onlyOwner{
     if (!(sbtFactory.isOwner(msg.sender) ) ){
         revert ONLY_FOR_OWNERS_BRO();
