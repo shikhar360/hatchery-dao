@@ -24,7 +24,7 @@ contract Exchange {
     }
      
 
-    function addDataListing (string memory _name , string memory _desc , uint _amt , string memory _hash)external onlyStartupORInvestors{
+    function addDataListing (string memory _name , string memory _desc , uint256 _amt , string memory _hash)external onlyStartupORInvestors{
       listingArr.push(DataListing(dId , _name , _desc , _amt , payable(msg.sender) , _hash ));
       dId ++ ;
 
@@ -67,7 +67,7 @@ contract Exchange {
      commissionRate = _amt ;
     }
 
-    function withdraw() external onlyOwner {
+    function withdrawExchangeEarnings() external onlyOwner {
     (bool callSuccess,) = payable(msg.sender).call{value:address(this).balance}("");
     require(callSuccess,"Call failed");
     }

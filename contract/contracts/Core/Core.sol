@@ -207,7 +207,7 @@ contract Core {
        return sbtFactory.getAddressOfOwner();
    }
    
-   function withdraw() external onlyOwner {
+   function withdrawCore() external onlyOwner {
     (bool callSuccess,) = payable(msg.sender).call{value:address(this).balance}("");
     require(callSuccess,"Call failed");
    }
