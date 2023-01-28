@@ -48,7 +48,7 @@ contract Exchange {
     function getAllBoughtData () external view returns(string[] memory) {
         return boughtData[msg.sender] ;
     }
-    
+
     function getAllListing () external view returns (DataListing[] memory){
         return listingArr ;
     } 

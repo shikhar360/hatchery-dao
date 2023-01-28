@@ -55,6 +55,9 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
 
     }
    
+    function whiteListingAddress (address _addr) external onlyRole(OWNER_ROLE) {
+        hasAccessOf[_addr] = STARTUP; 
+    }
 
    /*
    * @dev Most important functions to allow user in other contracts 
