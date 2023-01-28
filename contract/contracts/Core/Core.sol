@@ -46,7 +46,7 @@ contract Core {
    *@dev Adding startups to List
    */
    
-   function addStartupsToList ( string memory _name , string memory _descrip , string memory _tagline, uint256 _amt , string memory _imgLink ) external onlyStartupORInvestors {
+   function addStartupsToList ( string memory _name , string memory _descrip , string memory _tagline, uint256 _amt   ) external onlyStartupORInvestors {
    
     if(isAlreadyStartupOwner[msg.sender]){
         startupList[atIndex[msg.sender]].isActive = false ;
@@ -56,7 +56,7 @@ contract Core {
 
     atIndex[msg.sender] = s_ID ;
 
-    imageLink[msg.sender] = _imgLink ;
+    imageLink[msg.sender] = "initial_img" ;
     
     isAlreadyStartupOwner[msg.sender] = true;
 
