@@ -36,10 +36,10 @@ export default function Navbar() {
 
   return (
 
-    <nav className="w-full z-80  mx-auto my-1 p-0 text-black flex items-start justify-center transition-all duration-300 ease-linear fixed top-0 ">
+    <nav className="z-80 w-full bg-[#070a14]   mx-auto  p-0 text-white font-vt text-lg flex items-start justify-center transition-all duration-300 ease-linear fixed top-0 ">
      
-      <div className=" cursor-pointer flex items-center mt-3 mx-3 justify-center rounded-md ">
-        <img src="/hatch.png" alt="logo"  className="w-9 mr-2" /> <span>Hatchery</span> 
+      <div className="z-80  cursor-pointer flex items-center mt-3 mx-3 justify-center rounded-md ">
+       <span>Hatchery</span> 
       </div>
 
 
@@ -48,31 +48,31 @@ export default function Navbar() {
       >
         {width < sm    && (
           <div
-            className="w-full flex items-start justify-center cursor-pointer transition-all duration-300 ease-linear p-1 rounded-full"
+            className="z-80 w-full flex items-start justify-center cursor-pointer transition-all duration-300 ease-linear p-1 rounded-full"
             onClick={() => setIsActive(prev => !prev)}
           >
             {!isActive  ? (
-              <img src="/images/compass.png" alt="menu" width={"38"} className={`hover:rotate-45 duration-100 transition-all ease-linear`} />
+              <img src="/img/menu.png" alt="menu" width={"38"} className={`z-80 hover:rotate-45 duration-100 transition-all ease-linear`} />
             ) : (
-              <img src="/images/close2.png" alt="menu" width={"38"} className={`hover:rotate-90 duration-100 transition-all ease-linear`} />
+              <img src="/img/close.png" alt="menu" width={"38"} className={`z-80 hover:rotate-90 duration-100 transition-all ease-linear`} />
             )}
           </div>
         )}
 
         {isActive || width > sm ? (
           <>
-            <span className="cursor-pointer  bg-transparent  py-1 px-2 rounded-md   ">
+            <span className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md   ">
             <Link href={"/"}>
              Home
             </Link>
             </span>
-            <span className="cursor-pointer  bg-transparent  py-1 px-2 rounded-md   ">
-            <Link href={"/"}>
+            <span className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4  rounded-md   ">
+            <Link href={"/BuyNFT"}>
 
              Buy Now
             </Link>
             </span>
-            <span className="cursor-pointer bg-transparent  py-1 px-2 rounded-md   ">
+            <span className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear bg-transparent  py-1 px-4   rounded-md   ">
             <Link href={"/"}>
 
              Register

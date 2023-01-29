@@ -8,7 +8,40 @@ module.exports = {
     // "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jose : ['Josefin Sans', "sans-serif"],
+        press : ['Press Start 2P', "cursive"],
+        vt : ['VT323'," monospace"]
+       },
+       animation: {
+        rotate: "rotate 20s infinite",
+        bouncein: "bouncein 3s infinite",
+      },
+      keyframes: {
+                rotate: {
+                  "0%": {
+                    transform: "rotate(360deg) ",
+                  },
+                 
+                  "100%": {
+                    transform: " rotate(0)",
+                  },
+                },
+                bouncein: {
+                  "0%": {
+                    transform: "translate(0px , 5px) ",
+                  },
+                  "50%": {
+                    transform: "translate(0px , 0px) ",
+                  },
+                 
+                  "100%": {
+                    transform: " translate(0px , 5px)",
+                  },
+                },
+      }
+   }
   },
   plugins: [],
 }

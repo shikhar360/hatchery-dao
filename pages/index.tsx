@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Navbar from '../components/Navbar'
-
-import { img } from '../constant'
-
+import Homepage from '../components/Homepage';
+// import bg from '../public/img/bg.png'
 export default function Home() {
   
 
@@ -16,7 +15,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/hatch.png" />
       </Head>
-     
+      <Homepage/>
+
+
     </>
   )
 }
