@@ -1,7 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
-export default function Homepage() {
+export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
+
+const Homepage=()=> {
   function handleContact(e: string) {
     window.open(e);
   }
@@ -19,10 +22,10 @@ export default function Homepage() {
           <img src="/img/arr1.png" alt="img" className="ml-56 sm:w-32 w-28" />
           <Link
             href="/BuyNFT"
-            className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all border-dashed hover:border-none border-1  rounded-3xl hover:bg-white group"
+            className=" z-30 relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all border-dashed border-2 border-white  rounded-3xl hover:bg-white group"
           >
-            <span className="w-48 h-48 rounded-full rotate-[-40deg] bg-[#ff9e00] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0 "></span>
-            <span className="relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-black  font-bold font-vt space-x-2 text-3xl">
+            <span className="z-30 w-48 h-48 rounded-full rotate-[-40deg] bg-[#ff9e00] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0 "></span>
+            <span className="z-30 relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-black  font-bold font-vt space-x-2 text-3xl ">
               Buy NFT
             </span>
           </Link>
