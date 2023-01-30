@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Head from "next/head";
-import dynamic from "next/dynamic";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Navbar() {
@@ -52,9 +50,9 @@ export default function Navbar() {
             <p className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear bg-transparent   rounded-md   ">
             </p>
             <ConnectButton accountStatus={{
-    smallScreen: 'avatar',
-    largeScreen: 'full',
-  }} showBalance={false}/>
+             smallScreen: 'avatar',
+             largeScreen: 'full',
+             }} showBalance={false}/>
           
           </div>
        
