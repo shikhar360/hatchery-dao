@@ -1,16 +1,19 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
 export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
 
-const Homepage=()=> {
+ const Homepage=()=> {
   function handleContact(e: string) {
     window.open(e);
   }
+  useEffect(() => {
+
+  }, []);
   return (
     <>
-      <section className=" bg-[#100a25]  font-mono min-h-screen w-full text-white flex items-center justify-center flex-col overflow-hidden ">
+      <section className=" bg-[#100a25] min-h-screen font-mono w-full text-white flex items-center justify-center flex-col overflow-hidden ">
         <div className="flex flex-col items-center justify-center sm:mt-16 mt-12  w-full ">
           <p className="font-jose text-xs sm:text-base">Welcome to the</p>
           <p className="font-vt sm:text-9xl text-7xl  text-[#ff9e00]">
@@ -25,7 +28,7 @@ const Homepage=()=> {
             className=" z-30 relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all border-dashed border-2 border-white  rounded-3xl hover:bg-white group"
           >
             <span className="z-30 w-48 h-48 rounded-full rotate-[-40deg] bg-[#ff9e00] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0 "></span>
-            <span className="z-30 relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-black  font-bold font-vt space-x-2 text-3xl ">
+            <span className="z-30 relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-black  font-bold font-vt  text-3xl ">
               Buy NFT
             </span>
           </Link>
@@ -63,7 +66,6 @@ const Homepage=()=> {
         </div>
 
         <p className="mt-8 sm:text-4xl text-2xl font-semibold font-jose text-[#070a14]">
-          {" "}
           Who is this for ?
         </p>
 
@@ -74,7 +76,6 @@ const Homepage=()=> {
             className="w-9/12 sm:w-4/12 p-8 rounded-full"
           />
           <p className=" font-jose sm:text-sm text-xs p-8 text-center sm:w-2/5 w-9/12">
-            {" "}
             The Investors who are looking for early age startups to{" "}
             <b>invest</b> and want to aquire profit in long terms. They will be
             able to Invest and <b>Buy the critical datas</b> like profit
@@ -84,7 +85,6 @@ const Homepage=()=> {
         </div>
         <div className="flex sm:flex-row flex-col items-center justify-center w-full sm:w-3/4 gap-4">
           <p className=" font-jose sm:text-sm text-xs p-8 text-center sm:w-2/5 w-9/12">
-            {" "}
             The Startups that are looking for initial funding can post about
             their startus here , they will be able to do the basic{" "}
             <b>CRUD operations</b> on few things and will also be able to sell
@@ -124,8 +124,7 @@ const Homepage=()=> {
               className="w-12 hover:rotate-180 duration-150 transition-all ease-linear"
             />
             <p className="text-lg mb-3"> Invest as minimum as you want</p>
-            <p className="text-xs ">
-              With the help of HatcheryDao Investor SBT you can invest as small
+            <p className="text-xs ">With the help of HatcheryDao Investor SBT you can invest as small
               as 0.1$ , It must be greater than zero atleast , unless its no
               point to invest.
             </p>
@@ -140,8 +139,7 @@ const Homepage=()=> {
               className="w-12 hover:rotate-180 duration-150 transition-all ease-linear"
             />
             <p className="text-lg mb-3"> Get Investments all over the WORLD</p>
-            <p className="text-xs ">
-              Anyone with a metamask wallet can invest and if you are a startup
+            <p className="text-xs ">Anyone with a metamask wallet can invest and if you are a startup
               you can also get the funding from all over the world. Its that
               easy and simple. and not only that you will be able to exchange
               tokens into your fav token from our platform as well.
@@ -227,8 +225,9 @@ const Homepage=()=> {
         </div>
       </section>
       <div>
-      <p className="mx-auto w-full flex flex-col items-center justify-center  ">
+      <div className="mx-auto w-full flex flex-col items-center justify-center  ">
         <p className="sm:text-6xl text-3xl text-center my-4 mb-8  font-jose mt-12 ">So what you are waiting for ?
+        </p>
         <p className="sm:text-5xl text-2xl text-center my-4 mb-8  font-vt mt-12 ">
          If you want FREE Access ??
         </p>
@@ -236,9 +235,8 @@ const Homepage=()=> {
           Share the project on twitter and contact the owner with tweet link 😊️
         </p>
           <p className="sm:text-4xl text-2xl text-center my-4 mb-8  font-jose mt-12 ">OR</p>
-          </p>
           <Link href={"/BuyNFT"} className="mx-auto z-10 font-vt text-6xl bg-[#ff9e00] text-[#240046] rounded-3xl shadow-[#ffd670] shadow-xl py-2 px-8 hover:scale-110 transition-all duration-200 ease-linear">Buy Now</Link>
-        </p>
+        </div>
       
         <img src="img/arr2.png" alt="img" width={250} className="ml-48" />{" "}
        

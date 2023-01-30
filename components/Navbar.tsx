@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from "connectkit";
+
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
  
 
-  
-  
-
   return (
 
-    <nav className=" z-50 w-full bg-[#070a14]   mx-auto  p-0 text-white font-vt text-lg flex items-start justify-center transition-all duration-300 ease-linear fixed top-0 ">
+    <nav className=" z-50 w-full bg-[#070a14]     p-0 text-white font-vt text-lg flex items-start justify-between transition-all duration-300 ease-linear fixed top-0 ">
      
-      <div className="z-80  cursor-pointer flex items-center mt-3 mx-3 justify-center rounded-md ">
+
+      <div className="z-80 sm:w-72 cursor-pointer flex  items-center mt-3 px-3 justify-center rounded-md ">
        <span>Hatchery</span> 
       </div>
 
-
       <div
-        className={`h-full py-2 ml-auto   flex items-center gap-6 px-2 justify-end  flex-col sm:flex-row `}
+        className={`  py-2   flex items-end  justify-end sm:justify-between md:w-full flex-col sm:flex-row `}
       >
         
           <div
-            className="z-80 w-full flex items-start justify-center cursor-pointer transition-all duration-300 ease-linear p-1 rounded-full sm:hidden "
+            className="z-80  px-6 flex items-center justify-center cursor-pointer transition-all duration-300 ease-linear p-1 rounded-full sm:hidden "
             onClick={() => setIsActive(!isActive)}
           >
             {!isActive  ? (
-              <img src="/img/menu.png" alt="menu" width={"38"} className={`z-80 hover:rotate-45 duration-100 transition-all ease-linear`} />
+              <img src="/img/menu.png" alt="menu" width={"38"} className={` duration-100 transition-all ease-linear`} />
             ) : (
               <img src="/img/close.png" alt="menu" width={"38"} className={`z-80 hover:rotate-90 duration-100 transition-all ease-linear`} />
             )}
@@ -35,26 +33,48 @@ export default function Navbar() {
        
 
         
-          <div className={` ${isActive ? "flex flex-col gap-2 ":" hidden sm:flex gap-2 "}`}>
-            <p className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md   ">
+          <div className={` ${isActive ? "flex flex-col gap-2 items-center justify-center ":" hidden sm:flex sm:items-center sm:justify-end  sm:mr-auto gap-2 mx-auto text-xs md:text-sm lg:text-base"}`}>
+
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             <Link href={"/"}>
              Home
             </Link>
             </p>
-            <p className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4  rounded-md   ">
-            <Link href={"/BuyNFT"}>
-
-             Buy Now
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            <Link href={"/Assets"}>
+             Assets
             </Link>
             </p>
-            <p className="z-80 cursor-pointer hover:bg-[#ffef0e] hover:text-black transition-all duration-200 ease-linear bg-transparent   rounded-md   ">
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            <Link href={"/AllStartups"}>
+            AllStartups
+            </Link>
             </p>
-            <ConnectButton accountStatus={{
-             smallScreen: 'avatar',
-             largeScreen: 'full',
-             }} showBalance={false}/>
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            <Link href={"/PostStartup"}>
+            Post & Edit 
+            </Link>
+            </p>
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            <Link href={"/DataExchange"}>
+            Data Exchange
+            </Link>
+            </p>
           
           </div>
+
+            <div className={` ${isActive ? "flex flex-col gap-2 my-4 ":" hidden sm:flex sm:items-center sm:justify-center  gap-2 my-auto md:pr-4 pr-6"}`}>
+
+            <p className="z-80 cursor-pointer bg-[#ffbe0a] text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4  rounded-md text-center   ">
+            <Link href={"/BuyNFT"}>
+
+             Buy NFT
+            </Link>
+            </p>
+            <p className="z-80 cursor-pointer hover:bg-[#ffbe0a] hover:text-black transition-all duration-200 ease-linear bg-transparent   rounded-md text-center   ">
+            </p>
+            <ConnectKitButton/>
+            </div>  
        
       </div>
     
