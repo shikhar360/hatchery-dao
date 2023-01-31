@@ -22,6 +22,7 @@ export default function OWNERS_ONLY() {
 
   const provider = useProvider();
   const { data: signer } = useSigner();
+  const { address, isConnected } = useAccount();
 
   const sbt = useContract({
     address: HatcheryDaoAddress,
@@ -41,28 +42,27 @@ export default function OWNERS_ONLY() {
     signerOrProvider: signer || provider,
   });
 
-  const { address, isConnected } = useAccount();
 
   function handleSUri(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
+    
     setSUri(e.target.value);
   }
   function handleIUri(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
+    
     setIUri(e.target.value);
   }
 
   function handleWhiteListAdd(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
+    
     setWAddress(e.target.value);
   }
   function handleInterestCore(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
+   
     if (+e.target.value < 0) return;
     setICore(+e.target.value);
   }
   function handleCommissionExchange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(+e.target.value);
+   
     if (+e.target.value < 0) return;
     setCExchange(+e.target.value);
   }

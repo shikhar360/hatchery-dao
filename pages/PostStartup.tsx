@@ -1,8 +1,35 @@
-import React from "react";
+import React  ,{useMemo} from "react";
 import Link from "next/link";
 
-export default function PostStartup() {
+import { Player, useAssetMetrics } from '@livepeer/react';
+
+import {
+  LivepeerConfig,
+  createReactClient,
+  studioProvider,
+} from '@livepeer/react';
+
+function getKeys(){
+  return process.env.NEXT_PUBLIC_STUDIO_API_KEY
+ }
+
+const livepeerClient = createReactClient({
+  provider: studioProvider({
+    apiKey: getKeys() as string ,
+  }),
+});
+
+export default function PostStartup(){
   return (
+    <LivepeerConfig client={livepeerClient}>
+    <PostStartupExport/>
+    </LivepeerConfig>
+  )
+}
+
+function PostStartupExport() {
+  return (
+    
     <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('../public/img/grad2.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
       <Link
             href={{
@@ -142,10 +169,18 @@ export default function PostStartup() {
               </Link>
             </span>
             <div className="w-full my-4 flex items-center justify-center">
-              <video className="h-60 " autoPlay controls>
+              {/* <video className="h-60 " autoPlay controls>
                 <source src="/img/video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
-              </video>
+              </video> */}
+              <Player
+                title={"Video"}
+                playbackId={"b66bkq9unt44br5k"}
+                // src={url}
+                autoPlay
+                muted
+                autoUrlUpload={{ fallback: true, ipfsGateway: 'https://w3s.link' }}
+              />
             </div>
           </div>
         </div>
@@ -157,5 +192,6 @@ export default function PostStartup() {
       </span>
       {/* )} */}
     </div>
+
   );
 }
