@@ -17,6 +17,7 @@ module.exports = {
        animation: {
         rotate: "rotate 20s infinite",
         bouncein: "bouncein 3s infinite",
+        bounceb: "bounceb 7s infinite",
       },
       keyframes: {
                 rotate: {
@@ -34,6 +35,21 @@ module.exports = {
                   },
                   "50%": {
                     transform: "translate(0px , 0px) ",
+                  },
+                 
+                  "100%": {
+                    transform: " translate(0px , 5px)",
+                  },
+                },
+                bounceb: {
+                  "0%": {
+                    transform: "translate(0px , 5px) ",
+                  },
+                  "30%": {
+                    transform: "translate(5px , 5px) ",
+                  },
+                  "70%": {
+                    transform: "translate(5px , 0px) ",
                   },
                  
                   "100%": {

@@ -278,7 +278,7 @@ export default function OWNERS_ONLY() {
               ChangeIntrestInCore
             </button>
             <input
-              placeholder="5"
+              placeholder="5%"
               onChange={(e) => handleInterestCore(e)}
               type="number"
               className=" text-center py-2 px-6 my-4 focus:scale-110 focus:outline-none transition-all duration-150 ease-linear placeholder:text-zinc-500 placeholder:text-xs text-sm sm:1/2 md:w-3/6 w-4/5  border-none rounded-md  "
@@ -293,7 +293,7 @@ export default function OWNERS_ONLY() {
               ChangeCommissionInExchange
             </button>
             <input
-              placeholder="20"
+              placeholder="20%"
               onChange={(e) => handleCommissionExchange(e)}
               type="number"
               className=" text-center py-2 px-6 my-4 focus:scale-110 focus:outline-none transition-all duration-150 ease-linear placeholder:text-zinc-500 placeholder:text-xs text-sm sm:1/2 md:w-3/6 w-4/5 border-none rounded-md  "

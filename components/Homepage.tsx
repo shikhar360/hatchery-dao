@@ -102,7 +102,7 @@ export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
         <p className="sm:text-4xl text-2xl text-center font-semibold my-12">
           Reasons why you should Buy HatcheryDAO SBT ?
         </p>
-        <div className="grid sm:w-9/12 w-4/5 sm:grid-cols-3 grid-cols-2 items-center gap-5 bg-[#ff9e00] p-6 text-black rounded-3xl">
+        <div className="grid sm:w-9/12 w-4/5 sm:grid-cols-3 grid-cols-2 items-center gap-5 bg-[#9d4edd] p-6 text-black rounded-3xl">
         <div className="flex flex-col items-start justify-start w-full  hover:shadow-xl shadow-black transition-all duration-150 ease-linear p-2 hover:bg-white rounded-xl ">
             <img
               src="/img/aplayer.png"
@@ -205,20 +205,20 @@ export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
             <p className="sm:text-7xl  text-center my-4 mb-8 text-4xl font-vt text-white ">
               Some future Implementation 🚀️
             </p>
-            <p className=" sm:ml-auto py-2 hover:scale-105 px-4 bg-[#ff9e00] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
+            <p className=" sm:ml-auto py-2 hover:scale-105 px-4 bg-[#9d4edd] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
               A Dex can be implemented to facilitate trade in FIL 💱️{" "}
             </p>
-            <p className="py-2 hover:scale-105 px-4 bg-[#ff9e00] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
+            <p className="py-2 hover:scale-105 px-4 bg-[#9d4edd] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
               {" "}
               🧑‍🤝‍🧑️ Voteout based on majority if caught in wrong practices
             </p>
-            <p className=" sm:ml-auto py-2 hover:scale-105 px-4 bg-[#ff9e00] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
+            <p className=" sm:ml-auto py-2 hover:scale-105 px-4 bg-[#9d4edd] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
               Implementation of decentralized DBMS for storing data 🗄️
             </p>
-            <p className="py-2 hover:scale-105 px-4 bg-[#ff9e00] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
+            <p className="py-2 hover:scale-105 px-4 bg-[#9d4edd] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
               🆔️ Lens Profile can be integrated for decentralized Identity
             </p>
-            <p className="sm:ml-auto py-2 hover:scale-105 px-4 bg-[#ff9e00] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
+            <p className="sm:ml-auto py-2 hover:scale-105 px-4 bg-[#9d4edd] hover:bg-white text-[#070a14] rounded-full transition-all duration-200 ease-linear font-jose text-center mt-4 font-seibold sm:text-xl text-lg sm:w-3/5 w-full">
               Live prices of invested token based on current market 💹️
             </p>
           </div>
@@ -235,7 +235,7 @@ export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
           Share the project on twitter and contact the owner with tweet link 😊️
         </p>
           <p className="sm:text-4xl text-2xl text-center my-4 mb-8  font-jose mt-12 ">OR</p>
-          <Link href={"/BuyNFT"} className="mx-auto z-10 font-vt text-6xl bg-[#ff9e00] text-[#240046] rounded-3xl shadow-[#ffd670] shadow-xl py-2 px-8 hover:scale-110 transition-all duration-200 ease-linear">Buy Now</Link>
+          <Link href={"/BuyNFT"} className="mx-auto z-10 font-vt text-6xl bg-[#9d4edd] text-[#ffffff] rounded-3xl shadow-[#c3a2dd] shadow-xl py-2 px-8 hover:scale-110 transition-all duration-200 ease-linear">Buy Now</Link>
         </div>
       
         <img src="img/arr2.png" alt="img" width={250} className="ml-48" />{" "}
