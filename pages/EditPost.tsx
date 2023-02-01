@@ -1,4 +1,4 @@
-import { CoreContractAddress, CoreContractAbi } from "../constants";
+import { CoreContractAddress, CoreContractAbi, HatcheryDaoAddress, HatcheryDaoAbi } from "../constants";
 import {
   useAccount,
   useContract,
@@ -17,7 +17,6 @@ import Link from "next/link";
 import lighthouse from "@lighthouse-web3/sdk";
 
 import { Player, useAssetMetrics, useCreateAsset } from "@livepeer/react";
-import { useDropzone } from "react-dropzone";
 
 import {
   LivepeerConfig,
@@ -34,26 +33,22 @@ interface NewPost {
   descrip: string;
 }
 
-
-
-function getKeys(){
-  return process.env.NEXT_PUBLIC_STUDIO_API_KEY
- }
+function getKeys() {
+  return process.env.NEXT_PUBLIC_STUDIO_API_KEY;
+}
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
     apiKey: getKeys() as string,
   }),
 });
- 
- 
 
-export default function EditPost () {
-  return(
+export default function EditPost() {
+  return (
     <LivepeerConfig client={livepeerClient}>
-    <EditPostExport/>
+      <EditPostExport />
     </LivepeerConfig>
-  )
+  );
 }
 
 function EditPostExport() {
@@ -62,7 +57,6 @@ function EditPostExport() {
   const [amount, setAmount] = useState<number>();
   const [descrip, setDescrip] = useState<string>("");
   const [img, setImg] = useState();
-  
 
   const [post, setPost] = useState<NewPost>({
     name: "",
@@ -110,6 +104,12 @@ function EditPostExport() {
     signerOrProvider: signer || provider,
   });
 
+  const sbt = useContract({
+    address: HatcheryDaoAddress,
+    abi: HatcheryDaoAbi,
+    signerOrProvider: signer || provider,
+  });
+  
   async function bbb() {
     try {
     } catch (err) {
@@ -170,6 +170,15 @@ function EditPostExport() {
 
   async function submitPost(val: NewPost) {
     try {
+   
+      const checkS = await sbt?.isStartup(address);
+      const checkI = await sbt?.isInvestor(address);
+      console.log(checkS);
+       if (!(checkS || checkI)){
+        toast.warn("BUY NFT FIRST ")
+        return;
+       }
+
       if (!(val.amount && val.descrip && val.name && val.tagline)) return;
       console.log(val);
       //  console.log(+val.amount);
@@ -191,10 +200,8 @@ function EditPostExport() {
 
   //---------------------------------------------------------------------------------
   // LIGHTHOUSE IMPLEMENTATION
-  const toastId = React.useRef(null);
 
   function handleImage(e: any) {
-    // console.log(e.target.files[0]);
     setImg(e);
   }
 
@@ -231,52 +238,54 @@ function EditPostExport() {
 
   // ---------------------------------------------------------------------------------
   // Livepeer Integration
-  
+
   const [video, setVideo] = useState<any>();
-    
+
   const {
     mutate: createAsset,
     data: asset,
     status,
     progress,
     error,
-  } = useCreateAsset(video && {sources: [{ name: video?.name, file: video }] });
+  } = useCreateAsset(
+    video && { sources: [{ name: video?.name, file: video }] }
+  );
 
-  
   const isLoading = useMemo(
     () =>
-      status === 'loading' ||
-      (asset?.[0] && asset[0].status?.phase !== 'ready'),
-    [status, asset],
-  );
- 
-   useMemo(
-    () =>
-      progress?.[0].phase === 'failed'
-        ? toast.error("Error while uploading")
-        : progress?.[0].phase === 'waiting'
-        ? 'Waiting...'
-        : progress?.[0].phase === 'uploading'
-        ? (()=>toast("Uploading "))()
-        : progress?.[0].phase === 'processing'
-        ? (()=>toast.success("Processing , Approve transaction to Complete"))()
-        : null,
-    [progress],
+      status === "loading" ||
+      (asset?.[0] && asset[0].status?.phase !== "ready"),
+    [status, asset]
   );
 
-  useMemo(()=>{
-    if(asset?.[0]?.playbackId) {
-      (()=>uploadVideoHash(asset?.[0]?.playbackId))();
-      return asset[0].playbackId
-    } 
-  },[asset])
+  useMemo(
+    () =>
+      progress?.[0].phase === "failed"
+        ? toast.error("Error while uploading")
+        : progress?.[0].phase === "waiting"
+        ? "Waiting..."
+        : progress?.[0].phase === "uploading"
+        ? (() => toast("Uploading "))()
+        : progress?.[0].phase === "processing"
+        ? (() =>
+            toast.success("Processing , Approve transaction to Complete"))()
+        : null,
+    [progress]
+  );
+
+  useMemo(() => {
+    if (asset?.[0]?.playbackId) {
+      (() => uploadVideoHash(asset?.[0]?.playbackId))();
+      return asset[0].playbackId;
+    }
+  }, [asset]);
 
   // console.log(assetObj);
 
   async function uploadVideoHash(val: string) {
     try {
       if (!val) return;
-      console.log("yeyeyeyeeye   " , val);
+      console.log("yeyeyeyeeye   ", val);
       const tx = await core?.addVideoHash(val);
       toast("Upoaidng to Blockchain");
       await tx?.wait();
@@ -286,7 +295,7 @@ function EditPostExport() {
       toast.error("Error while editing video");
     }
   }
-  
+
   // ---------------------------------------------------------------------------------
 
   return (
@@ -442,7 +451,7 @@ function EditPostExport() {
                   Upload Image
                 </label>
                 <input
-                accept="image/*"
+                  accept="image/*"
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   id="file_input"
                   type="file"
@@ -475,17 +484,18 @@ function EditPostExport() {
                   Upload Video
                 </label>
                 <input
-                   accept="video/*"
+                  accept="video/*"
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   id="file_input"
                   type="file"
-                  onChange={(e : any)=>setVideo(e.target.files?.[0])}
+                  onChange={(e: any) => setVideo(e.target.files?.[0])}
                 />
 
                 <button
-                 disabled={isLoading || !createAsset}
-                onClick={() => createAsset?.()}
-                className="bg-[#2f1e6b] text-white py-1 px-4 w-3/4 mx-auto my-3 hover:scale-110 hover:shadow-xl hover:shadow-violet-800 rounded-xl transition-all duration-150 ease-linear">
+                  disabled={isLoading || !createAsset}
+                  onClick={() => createAsset?.()}
+                  className="bg-[#2f1e6b] text-white py-1 px-4 w-3/4 mx-auto my-3 hover:scale-110 hover:shadow-xl hover:shadow-violet-800 rounded-xl transition-all duration-150 ease-linear"
+                >
                   Save
                 </button>
               </div>

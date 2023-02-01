@@ -2,15 +2,21 @@ import React ,{useEffect} from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
+
 export default dynamic (() => Promise.resolve(Homepage), {ssr: false})
 
- const Homepage=()=> {
+const Homepage=()=> {
+
+
   function handleContact(e: string) {
     window.open(e);
   }
-  useEffect(() => {
+  
+  
 
-  }, []);
+   useEffect(() => {
+ 
+   }, []);
   return (
     <>
       <section className=" bg-[#100a25] min-h-screen font-mono w-full text-white flex items-center justify-center flex-col overflow-hidden ">

@@ -74,6 +74,7 @@ export default function BuyNFT() {
       console.log(err);
     }
   }
+  
   async function checkI() {
     try {
       const tx = await sbt?.isInvestor(address);

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ConnectKitButton } from "connectkit";
 
 
+
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
  
@@ -51,7 +52,9 @@ export default function Navbar() {
             </Link>
             </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
-            <Link href={"/PostStartup"}>
+            <Link href={{pathname:"/PostStartup",
+          //  query : {}
+          }}>
             Post & Edit 
             </Link>
             </p>
