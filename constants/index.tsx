@@ -1,6 +1,6 @@
-export const HatcheryDaoAddress = "0x1B69e07789856c0663f5a5619CE733CA34C70874"
-export const CoreContractAddress = "0xD11E7A0Dc33325D8dC99Dd071664A0A91E373523"
-export const ExchangeContractAddress = "0x5a3037a6AbFB24b6C020A987125fEf5B9c7C345f"
+export const HatcheryDaoAddress = "0x0f384daFF7652FfAf7A75CE8a515aE6e9B599135"
+export const CoreContractAddress = "0x5870ADabC88174DcC2b8BdF1B9e632956C3FD1B5"
+export const ExchangeContractAddress = "0x57327282668F9104312B11Cb0a811bA2909eeE5e"
 
 //--------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------
@@ -515,6 +515,44 @@ export const HatcheryDaoAbi = [
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "ownINFT",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "ownSNFT",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "owner",
     "outputs": [
@@ -822,11 +860,6 @@ export const CoreContractAbi = [
   {
     "inputs": [],
     "name": "NOT_A_VALID_OWNER",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NOT_UPLOADED_VIDEO_YET",
     "type": "error"
   },
   {

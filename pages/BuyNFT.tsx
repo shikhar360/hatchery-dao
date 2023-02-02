@@ -66,8 +66,15 @@ export default function BuyNFT() {
   async function check() {
     try {
       const tx = await sbt?.isStartup(address);
+      console.log(tx);
       if (tx == true) {
         setIsStartupO(true);
+        // toast.success("Thanks for buying StartupSBT");
+      }
+      const tx2 = await sbt?.isInvestor(address);
+      console.log(tx2);
+      if (tx2 == true) {
+        setIsInvestorO(true);
         // toast.success("Thanks for buying StartupSBT");
       }
     } catch (err) {
@@ -77,11 +84,7 @@ export default function BuyNFT() {
   
   async function checkI() {
     try {
-      const tx = await sbt?.isInvestor(address);
-      if (tx == true) {
-        setIsInvestorO(true);
-        // toast.success("Thanks for buying StartupSBT");
-      }
+     
     } catch (err) {
       console.log(err);
     }
@@ -89,7 +92,7 @@ export default function BuyNFT() {
 
   React.useEffect(() => {
     check();
-    checkI();
+    // checkI();
   }, []);
 
   return (

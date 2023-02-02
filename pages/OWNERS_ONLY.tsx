@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HatcheryDaoAbi, HatcheryDaoAddress } from "../constants";
 import { CoreContractAddress, CoreContractAbi } from "../constants";
 import { ExchangeContractAddress, ExchangeContractAbi } from "../constants";
@@ -183,6 +183,13 @@ export default function OWNERS_ONLY() {
     }
   }
 
+
+  const [balances , setBalances ] = useState<any>({
+    HatcheryBal:0,
+    CorBal:0,
+    ExBal:0
+  }) 
+
   const { data: HatcheryBal } = useBalance({
     address: HatcheryDaoAddress,
     watch: true,
@@ -196,6 +203,23 @@ export default function OWNERS_ONLY() {
     watch: true,
   });
 
+  
+  async function getBals (){
+
+
+    setBalances({
+      HatcheryBal: HatcheryBal?.formatted,
+      CorBal: CorBal?.formatted,
+      ExBal: ExBal?.formatted
+    })
+
+
+  }
+
+  useEffect(() => {
+    getBals()
+  }, [])
+
   return (
     <>
       <div className=" bg-[#100a25] min-h-screen w-full pb-16 flex flex-col items-center justify-center gap-4">
@@ -208,23 +232,23 @@ export default function OWNERS_ONLY() {
           <p className="text-xl sm:text-2xl">
             <b>HatcheryBal:</b>{" "}
             <b className="font-bold text-3xl text-lime-500">
-              {HatcheryBal?.formatted}
+              {balances.HatcheryBal}
             </b>{" "}
-            <b className="text-xs">{HatcheryBal?.symbol}</b>
+            <b className="text-xs">tFIL</b>
           </p>
           <p className="text-xl sm:text-2xl">
             <b>CoreBalance:</b>{" "}
             <b className="font-bold text-3xl text-lime-500">
-              {CorBal?.formatted}
+              {balances.CorBal}
             </b>{" "}
-            <b className="text-xs">{CorBal?.symbol}</b>
+            <b className="text-xs">tFIL</b>
           </p>
           <p className="text-xl sm:text-2xl">
             <b>ExchangeBalance :</b>{" "}
             <b className="font-bold text-3xl text-lime-500">
-              {ExBal?.formatted}
+              {balances.ExBal}
             </b>{" "}
-            <b className="text-xs">{ExBal?.symbol}</b>
+            <b className="text-xs">tFIL</b>
           </p>
         </div>
         <div className=" sm:w-3/5 w-4/5 bg-white/20 py-4 sm:px-16 px-4  hover:shadow-2xl hover:shadow-white transition-all duration-150 ease-linear rounded-xl shadow-white shadow-xl  backdrop-blur-md ">
