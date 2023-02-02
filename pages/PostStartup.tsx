@@ -50,6 +50,10 @@ interface IStartups {
   // img : string;
   // video : string;
 }
+interface IvidImg{
+  img : string;
+  vid : string;
+}
 
 function PostStartupExport() {
   const provider = useProvider();
@@ -81,17 +85,28 @@ function PostStartupExport() {
   const img = useRef("initial_img.jpg");
   const video = useRef("aaf8n564dj8nwh19");
 
+  const [ imgVid , setImgVid] = useState<IvidImg>({
+    img : "img/initial_img.jpg",
+    vid : "aaf8n564dj8nwh19"
+  })
+
   async function getImgVideo() {
     try {
       const imgTx = await core?.getImageLink(address);
       console.log(imgTx);
-      imgTx === "initial_img"
-        ? (img.current = "initial_img.jpg")
-        : (img.current = `https://gateway.lighthouse.storage/ipfs/${imgTx}`);
+      // imgTx === "initial_img"
+      //   ? img.current = "initial_img.jpg"
+      //   : img.current = `https://ipfs.io/ipfs/${imgTx}`;
       
       const vidTx = await core?.getVideoHash(address)
       console.log(vidTx);
-      video.current = vidTx ? vidTx : "aaf8n564dj8nwh19"
+      // video.current = (vidTx && vidTx !== "NOT_UPLOADED_YET") ? vidTx : "aaf8n564dj8nwh19"
+
+      setImgVid({
+        img : imgTx === "initial_img" ? "img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgTx}`,
+        vid : vidTx === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidTx
+      })
+
     } catch (err) {
       toast("Recommended to upload a Video ;)" )
       console.log("Recommended to upload a Video ;)");
@@ -104,12 +119,12 @@ function PostStartupExport() {
       const checkS = await sbt?.isStartup(address);
       const checkI = await sbt?.isInvestor(address);
       console.log(checkS);
-       if (!(checkS || checkI)){
-        toast("Post about Startup first  ")
+      if (!(checkS || checkI)){
+        toast("Buy NFT First")
         return;
-       }
+      }
 
-
+      
 
       const tx = await core?.getOwnerStartups();
 
@@ -125,7 +140,8 @@ function PostStartupExport() {
       console.log(tx);
       getImgVideo();
     } catch (err) {
-      console.log(err);
+      console.log("Post about your Startup first ;)");
+      toast("Post about your Startup first ;)");
     }
   };
 
@@ -160,7 +176,7 @@ function PostStartupExport() {
       <div className="w-full flex items-center justify-center">
         <div className="sm:w-2/4 w-4/5  h-5/6 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex flex-col items-start justify-center rounded-xl font-jose relative  ">
           <img
-            src={`img/${img.current}`}
+            src={imgVid.img}
             alt="header"
             className="h-60 w-full rounded-t-xl "
           />
@@ -280,7 +296,7 @@ function PostStartupExport() {
               </video> */}
               <Player
                 title={"Video"}
-                playbackId={video.current}
+                playbackId={imgVid.vid}
                 // src={url}
                 autoPlay
                 muted
@@ -293,12 +309,7 @@ function PostStartupExport() {
           </div>
         </div>
       </div>
-      {/* ) : ( */}
-      {/* <span className="text-2xl sm:text-3xl flex-wrap font-jose text-center content-center bg-white p-4 rounded-xl flex items-center justify-center gap-4  mx-auto  ">
-        You Haven't Posted about your Startup yet
-        <img src="img/doubt.png" alt="img" className="w-12 mr-2" />
-      </span> */}
-      {/* )} */}
+     
     </div>
   );
 }

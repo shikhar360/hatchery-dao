@@ -1,5 +1,5 @@
 export const HatcheryDaoAddress = "0x0f384daFF7652FfAf7A75CE8a515aE6e9B599135"
-export const CoreContractAddress = "0x5870ADabC88174DcC2b8BdF1B9e632956C3FD1B5"
+export const CoreContractAddress = "0xDd14dFA22FAaaf2812d2B8721B750F243fE52BDD"
 export const ExchangeContractAddress = "0x57327282668F9104312B11Cb0a811bA2909eeE5e"
 
 //--------------------------------------------------------------------------------------

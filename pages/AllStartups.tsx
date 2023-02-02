@@ -24,6 +24,8 @@ interface Istarts {
 
 export default function AllStartups() {
 
+  const [img , setImg] = useState<string>("img/initial_img.jpg");
+
  const [ allStarts , setAllStarts ] = useState<any>([{
   name: "",
   description: "",
@@ -65,7 +67,7 @@ console.log(allStarts);
           votes : itm.upVoteCount.toString()
         });
       });
-
+     
       // getImgVideo(allStarts.owner);
       setAllStarts(allStartups);
     } catch (err) {
@@ -93,7 +95,7 @@ console.log(allStarts);
        {allStarts.map((itm : any , idx : number )=>
        <div key={idx} className="md:w-2/4 sm:w-2/3 w-4/5 mx-auto h-40 pb-3 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex items-start justify-start  rounded-xl font-jose overflow-hidden ">
           <img
-            src={`img/initial_img.jpg`}
+            src={"img/initial_img.jpg"}
             alt="header" 
             className="h-40 w-48  "
             />
@@ -108,15 +110,15 @@ console.log(allStarts);
             />
           <span className='text-xs mx-0.5'>({itm.votes})</span> </p>
            
-           <Link
-          href={{
-            pathname: "/Expand",
-            query: { data : JSON.stringify(itm) },
-          }}
+          <Link
+            href={{
+              pathname: "/Expand",
+              query: { name : itm.name , descrip : itm.description , tags : itm.tags , owner : itm.owner , amt : itm.amt , votes : itm.votes  },
+             
+            }}
           
-          className="rounded-3xl   bg-violet-500  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-1.5 px-3 sm:my-3 my-1 mr-2 sm:ml-auto  "
+          className="rounded-3xl   bg-violet-500  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-1.5 px-3 sm:my-3 my-1 mr-2 sm:ml-auto"
           >
-          
           Expand
         </Link>
           </div>

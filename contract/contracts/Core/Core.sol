@@ -190,7 +190,7 @@ contract Core {
       return startupList[atIndex[msg.sender]].amount ; 
    }
    
-    function getVideoHash(address _addr) external onlyStartupOwners view returns(string memory){
+    function getVideoHash(address _addr) external view returns(string memory){
         if (havePostedHash[_addr] == false){
            return "NOT_UPLOADED_YET";
         }
@@ -198,7 +198,7 @@ contract Core {
         return attachVideoHash[_addr];
     }
     
-    function getImageLink( address _addr) external onlyStartupOwners view returns(string memory){
+    function getImageLink( address _addr) external view returns(string memory){
         return imageLink[_addr] ;
     }
    

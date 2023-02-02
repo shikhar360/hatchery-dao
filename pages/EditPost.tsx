@@ -302,7 +302,7 @@ function EditPostExport() {
     <div className="flex items-center justify-center flex-col min-h-screen w-full font-jose bg-[#100a25]  bg-cover bg-no-repeat sm:pt-20 py-20 sm:pb-44  relative">
       <Head>
         <title> Post & Edit Startup</title>
-        <meta name="description" content="Created with ❤ by SHIKHAR" />
+       
       </Head>
       <ToastContainer />
       <div className="sm:w-60 w-48 h-48 sm:h-60 animate-bounceb delay-1000 rounded-full bg-gradient-to-br to-[#9a75ff] from-[#3b296d] absolute md:top-16  md:left-48  sm:top-12 sm:left-28  top-28 left-8 z-10 "></div>
@@ -310,7 +310,7 @@ function EditPostExport() {
 
       <div className="flex flex-col text-white sm:w-6/12 w-11/12 z-30  bg-white/10 backdrop-blur-lg rounded-2xl items-start justify-start gap-2 my-auto  ">
         <div className="flex items-center justify-start  w-full z-30 ">
-          {activateEdit !== "POST_NEW" ? (
+          {activateEdit && activateEdit !== "POST_NEW" ? (
             <span className=" z-30 text-2xl w-5/6 text-start sm:text-3xl mx-8 mt-4  ">
               <b className="text-base">Edit - </b> {activateEdit}
             </span>

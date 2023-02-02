@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react'
+import React , {useEffect, useState} from 'react'
 import Link from 'next/link'
 import { Player} from "@livepeer/react";
 import {
@@ -40,16 +40,19 @@ import {
   useSigner,
   useBalance,
 } from "wagmi";
+import { stringify } from 'querystring';
+
+interface IvidImg{
+  img : string;
+  vid : string;
+}
 
 function ExpandExport() {
 
   const router = useRouter();
-  const data1 = router.query.data!;
-  console.log(data1);
-  // if (data1) {
-//  const obj  = ""
-    const obj = JSON.parse(data1 as string);
-  // }
+  const {name , descrip , tags , owner , amt , votes } = router?.query
+  console.log(name , descrip , tags , owner , amt);
+
 
   const provider = useProvider();
   const { data: signer } = useSigner();
@@ -61,14 +64,26 @@ function ExpandExport() {
     signerOrProvider: signer || provider,
   });
  
-  
+  const [ imgVid , setImgVid] = useState<IvidImg>({
+    img : "",
+    vid : ""
+  })
+ 
+  console.log(imgVid);
   async function getImgVideo(addr : string) {
+    
     try {
+      // console.log(addr);
       const imgTx = await core?.getImageLink(addr);
       console.log(imgTx);
      
       const vidTx = await core?.getVideoHash(addr)
       console.log(vidTx);
+
+      setImgVid({
+        img : imgTx === "initial_img" ? "/img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgTx}`,
+        vid : vidTx === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidTx
+      })
       
     } catch (err) {
      
@@ -77,10 +92,12 @@ function ExpandExport() {
   }
  
   useEffect(()=>{
-    if(obj.owner){
-      getImgVideo(obj.owner)
+    if(owner){
+      getImgVideo(owner as string)
     }
   },[])
+
+  
   
   const [invest , setInvest] = React.useState<number>()
 
@@ -94,11 +111,39 @@ function ExpandExport() {
     abi: HatcheryDaoAbi,
     signerOrProvider: signer || provider,
   });
+  
+  const { data: userBal } = useBalance({
+    address: address,
+    watch: true,
+  });
+  
+//  const [balances , setBalances] = useState<any>({
+//   userBal : 0
+//  })
 
+//  async function getBals (){
+//     setBalances({
+//       userBal : userBal
+//     })
+//   }
+
+//   useEffect(() => {
+//     getBals()
+//   }, [])
 
   async function investStartup(val : number){
     try {
+      
     
+      const balance = await userBal;
+
+      console.log(balance)
+      if (balance === undefined) return
+      if(+(balance.formatted) < val){
+        toast.warn("Insufficient Balance")
+        return;
+      }
+      
       
       const checkI = await sbt?.isInvestor(address);
      
@@ -107,12 +152,12 @@ function ExpandExport() {
         return;
        }
 
-      const investTx = await core?.investAmount(obj.owner , {value : ethers.utils.parseEther(val.toString())})
+      const investTx = await core?.investAmount(owner , {value : ethers.utils.parseEther(val.toString())})
       console.log(investTx);
       toast.success("Investing .........")
       await investTx?.wait()
       toast.success("Invested Successfully")
-      
+
     } catch (err) {
       toast.error("Investment Failed")
     }
@@ -120,25 +165,48 @@ function ExpandExport() {
 
 
   return (
+    <>
     <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('../public/img/grad3.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
       <ToastContainer />
+      
+      <button
+          className="rounded-xl   bg-[#fff]  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-0.5 px-2 ml-4 "
+          onClick={()=>getImgVideo(owner as string)}
+        >
+          <img src="img/refresh.png" alt="img" className="sm:w-8 w-6 mr-2" />{" "}
+          <span className="text-sm">Refresh</span>
+        </button>
       <div className="w-full flex items-center justify-center">
-        {obj && <div className="sm:w-2/4 w-4/5  h-5/6 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex flex-col items-start justify-center rounded-xl font-jose relative mb-8  ">
+        {name && <div className="sm:w-2/4 w-4/5  h-5/6 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex flex-col items-start justify-center rounded-xl font-jose relative mb-8  ">
           <img
-            src={`img/initial_img.jpg`}
+            src={imgVid.img}
             alt="header"
             className="h-60 w-full rounded-t-xl "
           />
           
 
           <div className=" w-9/12 flex items-center mt-4 ml-4 text-white">
-            <span className="text-2xl font-semibold">{obj.name}</span>
-           
+            <span className="text-2xl font-semibold">{name}</span>
+            <div className="ml-2">
+              <img
+            src='img/star.png'
+            alt="header"
+            className=" inline-block h-3 w-3  "
+            />
+          <span className='text-xs mx-0.5'>({votes})</span> 
+          </div>
+            <button
+          className="rounded-md bg-[#2176ff]  hover:shadow-xl  hover:scale-110 hover:shadow-blue-400 transition-all duration-200 ease-linear flex items-center justify-center py-0.5 px-2 ml-4 "
+          // onClick={()=>getImgVideo(owner as string)}
+           >
+          <img src="img/camera.png" alt="img" className="sm:w-4 w-3 mr-2" />{" "}
+          <span className="text-sm">Huddle Meet </span>
+          </button>
           </div>
 
           <div className="flex items-center justify-between gap-8 ">
             <span className="text-base mt-3 ml-4 text-white  ">
-              Seeking - <b className="font-bold text-xl">${obj.amt}</b>
+              Seeking - <b className="font-bold text-xl">${amt}</b>
             </span>
            
           </div>
@@ -149,7 +217,7 @@ function ExpandExport() {
             
             </span>
             <p className=" mt-3 mx-4 text-zinc-300 flex-wrap">
-             {obj.tags}
+             {tags}
             </p>
           </div>
           <div className="flex items-start flex-col flex-wrap justify-start  text-white ">
@@ -158,7 +226,7 @@ function ExpandExport() {
              
             </span>
             <p className=" mt-3 mx-4 flex-wrap text-zinc-300">
-             {obj.description} 
+             {descrip} 
             </p>
           </div>
           <div className="flex items-start flex-col flex-wrap justify-center  text-white w-full  ">
@@ -167,13 +235,10 @@ function ExpandExport() {
              
             </span>
             <div className="w-full my-4 flex items-center justify-center">
-              {/* <video className="h-60 " autoPlay controls>
-                <source src="/img/video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video> */}
-              {/* <Player
+             
+              <Player
                 title={"Video"}
-                playbackId={video.current}
+                playbackId={imgVid.vid}
                 // src={url}
                 autoPlay
                 muted
@@ -181,7 +246,7 @@ function ExpandExport() {
                   fallback: true,
                   ipfsGateway: "https://w3s.link",
                 }}
-              /> */}
+              />
             </div>
 
           </div>
@@ -210,5 +275,6 @@ function ExpandExport() {
         </div>}
       </div>
     </div>
+    </>
   )
 }
