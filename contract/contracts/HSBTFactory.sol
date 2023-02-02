@@ -22,6 +22,8 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
 
     mapping(address => uint256) public ownersID;
     mapping(address => bytes32) public hasAccessOf ;
+    mapping(address => bool) public ownSNFT;
+    mapping(address => bool) public ownINFT;
 
 
 
@@ -41,14 +43,14 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
         _tokenIdCounter.increment();
 
         if(msg.value == 0.1 ether){
-        hasAccessOf[msg.sender] = STARTUP;   
+        ownSNFT[msg.sender] = true ; 
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, startup_uri);
         }
         //--------------------------------------------
 
         if(msg.value == 0.2 ether){
-        hasAccessOf[msg.sender] = INVESTOR;       
+        ownINFT[msg.sender] = true ;       
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, investor_uri);
         }
@@ -56,7 +58,7 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
     }
    
     function whiteListingAddress (address _addr) external onlyRole(OWNER_ROLE) {
-        hasAccessOf[_addr] = STARTUP; 
+        ownSNFT[_addr] = true ;  
     }
 
    /*
@@ -64,11 +66,11 @@ contract HatcherySBT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl 
    *      checking wether the address is startup owner or investor.
    */
    function isStartup (address _operator) public view returns (bool){
-     return hasAccessOf[_operator] == STARTUP ? true : false;
+     return ownSNFT[_operator] == true ? true : false;
    }
 
     function isInvestor (address _operator) public view returns (bool){
-     return hasAccessOf[_operator] == INVESTOR ? true : false;
+     return ownINFT[_operator] == true ? true : false;
    }
 
    function isOwner (address _operator) public view returns (bool){

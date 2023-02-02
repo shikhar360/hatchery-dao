@@ -6,7 +6,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 module.exports = {
   solidity: "0.8.17",
-  defaultNetwork: "hyperspace",
+  // defaultNetwork: "hyperspace",
   networks: {
     hyperspace : {
       url: RPC,

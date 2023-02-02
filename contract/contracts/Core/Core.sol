@@ -52,7 +52,7 @@ contract Core {
         startupList[atIndex[msg.sender]].isActive = false ;
     }
 
-    startupList.push(S_Details( s_ID , _name , _descrip , _tagline , _amt , payable(msg.sender) , 0  , true ));
+    startupList.push(S_Details( s_ID , _name , _tagline , _descrip , _amt , payable(msg.sender) , 0  , true ));
 
     atIndex[msg.sender] = s_ID ;
 
@@ -192,7 +192,7 @@ contract Core {
    
     function getVideoHash(address _addr) external onlyStartupOwners view returns(string memory){
         if (havePostedHash[_addr] == false){
-           revert NOT_UPLOADED_VIDEO_YET();
+           return "NOT_UPLOADED_YET";
         }
 
         return attachVideoHash[_addr];
