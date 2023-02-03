@@ -50,7 +50,7 @@ interface IvidImg{
 function ExpandExport() {
 
   const router = useRouter();
-  const {name , descrip , tags , owner , amt , votes } = router?.query
+  const {name , descrip , tags , owner , amt , votes , imgHash , vidHash} = router?.query
   console.log(name , descrip , tags , owner , amt);
 
 
@@ -70,32 +70,32 @@ function ExpandExport() {
   })
  
   console.log(imgVid);
-  async function getImgVideo(addr : string) {
+  // async function getImgVideo(addr : string) {
     
-    try {
-      // console.log(addr);
-      const imgTx = await core?.getImageLink(addr);
-      console.log(imgTx);
+  //   try {
+  //     // console.log(addr);
+  //     const imgTx = await core?.getImageLink(addr);
+  //     console.log(imgTx);
      
-      const vidTx = await core?.getVideoHash(addr)
-      console.log(vidTx);
+  //     const vidTx = await core?.getVideoHash(addr)
+  //     console.log(vidTx);
 
-      setImgVid({
-        img : imgTx === "initial_img" ? "/img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgTx}`,
-        vid : vidTx === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidTx
-      })
+  //     setImgVid({
+  //       img : imgTx === "initial_img" ? "/img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgTx}`,
+  //       vid : vidTx === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidTx
+  //     })
       
-    } catch (err) {
+  //   } catch (err) {
      
-      console.log("Recommended to upload a Video ;)");
-    }
-  }
+  //     console.log("Recommended to upload a Video ;)");
+  //   }
+  // }
  
-  useEffect(()=>{
-    if(owner){
-      getImgVideo(owner as string)
-    }
-  },[])
+  // useEffect(()=>{
+  //   if(owner){
+  //     getImgVideo(owner as string)
+  //   }
+  // },[])
 
   
   
@@ -169,17 +169,17 @@ function ExpandExport() {
     <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('../public/img/grad3.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
       <ToastContainer />
       
-      <button
+      {/* <button
           className="rounded-xl   bg-[#fff]  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-0.5 px-2 ml-4 "
           onClick={()=>getImgVideo(owner as string)}
         >
           <img src="img/refresh.png" alt="img" className="sm:w-8 w-6 mr-2" />{" "}
           <span className="text-sm">Refresh</span>
-        </button>
+        </button> */}
       <div className="w-full flex items-center justify-center">
         {name && <div className="sm:w-2/4 w-4/5  h-5/6 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex flex-col items-start justify-center rounded-xl font-jose relative mb-8  ">
           <img
-            src={imgVid.img}
+            src={imgHash === "initial_img" ? "/img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgHash}`}
             alt="header"
             className="h-60 w-full rounded-t-xl "
           />
@@ -195,13 +195,17 @@ function ExpandExport() {
             />
           <span className='text-xs mx-0.5'>({votes})</span> 
           </div>
-            <button
+            <Link
+            href={{
+              pathname: "/PitchDeck",
+              query: { data : owner },
+            }}
           className="rounded-md bg-[#2176ff]  hover:shadow-xl  hover:scale-110 hover:shadow-blue-400 transition-all duration-200 ease-linear flex items-center justify-center py-0.5 px-2 ml-4 "
           // onClick={()=>getImgVideo(owner as string)}
            >
           <img src="img/camera.png" alt="img" className="sm:w-4 w-3 mr-2" />{" "}
           <span className="text-sm">Huddle Meet </span>
-          </button>
+          </Link>
           </div>
 
           <div className="flex items-center justify-between gap-8 ">
@@ -238,7 +242,7 @@ function ExpandExport() {
              
               <Player
                 title={"Video"}
-                playbackId={imgVid.vid}
+                playbackId={vidHash === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidHash as string}
                 // src={url}
                 autoPlay
                 muted

@@ -20,6 +20,8 @@ interface Istarts {
   active : boolean
   id : string
   votes : string
+  imgHash : string
+  vidHash : string
 }
 
 export default function AllStartups() {
@@ -35,6 +37,8 @@ export default function AllStartups() {
   active : false,
   id : '',
   votes : '',
+  imgHash : '',
+  vidHash : ''
  }])
 
 console.log(allStarts);
@@ -52,6 +56,7 @@ console.log(allStarts);
     try {
       const myStartupTx = await core?.getListOfStartups();
       // console.log(myStartupTx);
+      console.log(myStartupTx);
       let allStartups : Istarts[] = [];
 
       myStartupTx.forEach((itm : any) => {
@@ -64,7 +69,9 @@ console.log(allStarts);
           amt : itm.amount.toString(),
           active : itm.isActive,
           id : itm.sID.toString(),
-          votes : itm.upVoteCount.toString()
+          votes : itm.upVoteCount.toString(),
+          imgHash : itm.imgHash,
+          vidHash : itm.videoHash
         });
       });
      
@@ -95,7 +102,7 @@ console.log(allStarts);
        {allStarts.map((itm : any , idx : number )=>
        <div key={idx} className="md:w-2/4 sm:w-2/3 w-4/5 mx-auto h-40 pb-3 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex items-start justify-start  rounded-xl font-jose overflow-hidden ">
           <img
-            src={"img/initial_img.jpg"}
+            src={itm.imgHash === "initial_img" ? "img/initial_img.jpg" : `https://ipfs.io/ipfs/${itm.imgHash}`}
             alt="header" 
             className="h-40 w-48  "
             />
@@ -113,7 +120,7 @@ console.log(allStarts);
           <Link
             href={{
               pathname: "/Expand",
-              query: { name : itm.name , descrip : itm.description , tags : itm.tags , owner : itm.owner , amt : itm.amt , votes : itm.votes  },
+              query: { name : itm.name , descrip : itm.description , tags : itm.tags , owner : itm.owner , amt : itm.amt , votes : itm.votes , imgHash : itm.imgHash , vidHash : itm.vidHash  },
              
             }}
           

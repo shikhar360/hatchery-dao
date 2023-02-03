@@ -53,14 +53,21 @@ export default function Navbar() {
             </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             <Link href={{pathname:"/PostStartup",
-          //  query : {}
-          }}>
+              //  query : {}
+              }}>
             Post & Edit 
             </Link>
             </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             <Link href={"/DataExchange"}>
             Data Exchange
+            </Link>
+            </p>
+            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            <Link href={{
+               pathname: "/PitchDeckPublic", 
+              }}>
+             Pitch Deck
             </Link>
             </p>
           

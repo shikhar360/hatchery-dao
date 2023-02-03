@@ -39,8 +39,7 @@ contract Core {
    mapping(address => uint256) internal totalInvested;
    mapping(address => uint256) internal totalFundsCollected;
    mapping(address => bool) internal isValidInvestor;
-   mapping(address => bool) internal havePostedHash;
-   mapping(address => string) internal imageLink ;
+   
 
    /*
    *@dev Adding startups to List
@@ -52,11 +51,10 @@ contract Core {
         startupList[atIndex[msg.sender]].isActive = false ;
     }
 
-    startupList.push(S_Details( s_ID , _name , _tagline , _descrip , _amt , payable(msg.sender) , 0  , true ));
+    startupList.push(S_Details( s_ID , _name , _tagline , _descrip , _amt , payable(msg.sender) , 0  , true , "initial_img" , "NOT_UPLOADED_YET" ));
 
     atIndex[msg.sender] = s_ID ;
 
-    imageLink[msg.sender] = "initial_img" ;
     
     isAlreadyStartupOwner[msg.sender] = true;
 
@@ -71,8 +69,7 @@ contract Core {
    */
     function addVideoHash( string memory _hash) external onlyStartupORInvestors {
        if(isAlreadyStartupOwner[msg.sender] == true){
-        attachVideoHash[msg.sender] = _hash;
-        havePostedHash[msg.sender] = true;
+        startupList[atIndex[msg.sender]].videoHash = _hash;
        }else {
            revert BE_STARTUP_OWNER();
        }
@@ -80,7 +77,7 @@ contract Core {
     
     function editImgLink (string memory _imgLink)external onlyStartupORInvestors {
         if(isAlreadyStartupOwner[msg.sender] == true){
-            imageLink[msg.sender] = _imgLink ;
+            startupList[atIndex[msg.sender]].imgHash = _imgLink;
         }else {
         revert BE_STARTUP_OWNER();
         }
@@ -191,15 +188,11 @@ contract Core {
    }
    
     function getVideoHash(address _addr) external view returns(string memory){
-        if (havePostedHash[_addr] == false){
-           return "NOT_UPLOADED_YET";
-        }
-
-        return attachVideoHash[_addr];
+        return startupList[atIndex[_addr]].videoHash;
     }
     
     function getImageLink( address _addr) external view returns(string memory){
-        return imageLink[_addr] ;
+        return startupList[atIndex[_addr]].imgHash ;
     }
    
    

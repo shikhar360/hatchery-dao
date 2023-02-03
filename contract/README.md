@@ -2,7 +2,7 @@
 #### HatcheryDao contract deployed to : 
 - 0x0f384daFF7652FfAf7A75CE8a515aE6e9B599135
 #### Core contract deployed to: 
-- 0xDd14dFA22FAaaf2812d2B8721B750F243fE52BDD
+- 0x01C3993802Fb76cfa1E7cBD8566f25CD79Da844D
 #### DataExchange contract deployed to:
 - 0x57327282668F9104312B11Cb0a811bA2909eeE5e
 

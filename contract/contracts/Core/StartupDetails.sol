@@ -10,6 +10,6 @@ struct S_Details {
   address payable ownerAddress;
   uint256 upVoteCount;
   bool isActive;
-
+  string imgHash;
+  string videoHash;
 }
-
