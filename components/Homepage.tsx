@@ -163,7 +163,7 @@ const Homepage=()=> {
               We hate mistakes , so we have made it easy for you to do the CRUD
               operations on your startup. You can do the basic CRU operations on
               name, description, amount and other things. We intentionally left
-              the D , you can't delete but deactivations are allowed.
+              the D, you cant delete but deactivations are allowed.
             </p>
           </div>
 

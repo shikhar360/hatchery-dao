@@ -7,14 +7,7 @@ import { useAccount } from "wagmi";
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
-  const [addr, setAddr] = useState<string>('')
-  const { address, isConnected } = useAccount();
-
-  useEffect(() => {
-    if (isConnected){
-      setAddr(address as string)
-    }
-  }, [isConnected])
+  
 
   return (
 
@@ -52,7 +45,7 @@ export default function Navbar() {
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             <Link href={{
                pathname: "/Assets", 
-                query: { addr: addr }
+                
               }}>
              Assets
             </Link>
@@ -63,7 +56,7 @@ export default function Navbar() {
             </Link>
             </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
-            <Link href={{pathname:"/PostStartup",
+            <Link href={{pathname:"/PostStartup"
               //  query : {}
               }}>
             Post & Edit 
