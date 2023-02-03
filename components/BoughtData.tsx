@@ -78,15 +78,15 @@ function BoughtData({cid} : Icid) {
   }
 
   return (
-    <div className="flex py-2 rounded-xl  w-full bg-white/30 backdrop-blur-xl items-center justify-center  px-8">
+    <div className="flex py-2 rounded-xl flex-col w-full bg-white/30 backdrop-blur-xl items-center justify-center  px-8">
 
-      <p className="px-4 text-sm truncate">{cid}</p>
-      <div cl>
+      <p className="px-4 text-sm truncate w-full text-center">{cid}</p>
+      <div className="flex items-center justify-center flex-wrap sm:gap-8  mt-2 w-full">
 
-      <button onClick={()=>decrypt(cid)}>decrypt</button>
+      <button  className="bg-[#070a14] text-white py-1 px-2  mx-auto  hover:scale-105 hover:shadow-md hover:shadow-[#100a25] rounded-md transition-all duration-150 ease-linear  text-center" onClick={()=>decrypt(cid)}>Decrypt</button>
       {
         fileURL?
-        <a href={fileURL} target="_blank">viewFile</a>
+        <a  className="bg-[#070a14] text-white py-1 px-2  mx-auto  hover:scale-105 hover:shadow-md hover:shadow-[#100a25] rounded-md transition-all duration-150 ease-linear  text-center" href={fileURL} target="_blank">ViewFile</a>
         :
         null
       }

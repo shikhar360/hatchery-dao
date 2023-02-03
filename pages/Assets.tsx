@@ -45,9 +45,9 @@ export default function Assets() {
   }, [])
   
   return (
-    <div className="w-full min-h-screen overflow-x-hidden pt-20   bg-[url('../public/img/initial_img.jpg')] bg-cover bg-no-repeat  overflow-hidden  relative ">
+    <div className="w-full min-h-screen overflow-x-hidden sm:pt-28 md:pt-20 pt-40   bg-[url('../public/img/initial_img.jpg')] bg-cover bg-no-repeat  overflow-hidden  relative ">
      
-     <div className="absolute top-24 left-4 z-20 ">
+     <div className="absolute top-24 left-2 z-20 ">
 
         <button
           
@@ -57,7 +57,7 @@ export default function Assets() {
           <span>Startups Invested</span>
         </button>
     <button
-         
+         onClick={getallBoughtData}
          className="rounded-3xl z-20  bg-[#fff]  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-1.5 my-4 mx-4 px-2 text-sm  "
          >
           <img src="img/docs.png" alt="img" className="sm:w-8 w-6 mr-2" />{" "}
