@@ -111,7 +111,7 @@ const Homepage=()=> {
         <div className="grid sm:w-9/12 w-4/5 sm:grid-cols-3 grid-cols-2 items-center gap-5 bg-[#9d4edd] p-6 text-black rounded-3xl">
         <div className="flex flex-col items-start justify-start w-full  hover:shadow-xl shadow-black transition-all duration-150 ease-linear p-2 hover:bg-white rounded-xl ">
             <img
-              src="/img/aplayer.png"
+              src="img/aplayer.png"
               alt="img"
               className="w-12 hover:rotate-180 duration-150 transition-all ease-linear"
             />
