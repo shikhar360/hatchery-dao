@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import {ethers} from 'ethers';
+
 import lighthouse from '@lighthouse-web3/sdk';
 import {
-  useAccount,
-  useContract,
-  useProvider,
   useSigner,
-  useBalance,
 } from "wagmi";
 
 interface IsignAuth{
@@ -19,9 +15,9 @@ interface Icid{
 
 function BoughtData({cid} : Icid) {
   
-  const provider = useProvider();
+  
   const { data: signer } = useSigner();
-  const { address, isConnected } = useAccount();
+  
   const [fileURL, setFileURL] = useState<string>("");
 
   const sign_auth_message = async()   =>{
@@ -35,43 +31,22 @@ function BoughtData({cid} : Icid) {
     return({publicKey: publicKey, signedMessage: signedMessage});
   }
 
-  /* Decrypt file */
+ 
   const decrypt = async( cidHash : string) =>{
-    // Fetch file encryption key
-    // const cid = "QmcuuAtmYqbPYmPx3vhJvPDi61zMxYvJbfENMjBQjq7aM3"; //replace with your IPFS CID
-    // const {publicKey  , signedMessage } = await sign_auth_message();
+   
     const data = await sign_auth_message();
     console.log(data?.signedMessage)
-    /*
-      fetchEncryptionKey(cid, publicKey, signedMessage)
-        Parameters:
-          CID: CID of the file to decrypt
-          publicKey: public key of the user who has access to file or owner
-          signedMessage: message signed by the owner of publicKey
-    */
+
     const keyObject = await lighthouse.fetchEncryptionKey(
       cid,
       data?.publicKey as string,
       data?.signedMessage as string 
     );
 
-    // Decrypt file
-    /*
-      decryptFile(cid, key, mimeType)
-        Parameters:
-          CID: CID of the file to decrypt
-          key: the key to decrypt the file
-          mimeType: default null, mime type of file
-    */
-   
-    // const fileType = "image/jpeg";
+    
     const decrypted = await lighthouse.decryptFile(cidHash , keyObject.data.key);
     console.log(decrypted)
-    /*
-      Response: blob
-    */
-
-    // View File
+   
     const url = URL.createObjectURL(decrypted);
     console.log(url);
     setFileURL(url);

@@ -33,7 +33,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import {
-
   useAccount,
   useContract,
   useProvider,
@@ -41,6 +40,7 @@ import {
   useBalance,
 } from "wagmi";
 import { stringify } from 'querystring';
+import Head from 'next/head';
 
 interface IvidImg{
   img : string;
@@ -69,34 +69,6 @@ function ExpandExport() {
     vid : ""
   })
  
-  // console.log(imgVid);
-  // async function getImgVideo(addr : string) {
-    
-  //   try {
-  //     // console.log(addr);
-  //     const imgTx = await core?.getImageLink(addr);
-  //     console.log(imgTx);
-     
-  //     const vidTx = await core?.getVideoHash(addr)
-  //     console.log(vidTx);
-
-  //     setImgVid({
-  //       img : imgTx === "initial_img" ? "/img/initial_img.jpg" : `https://ipfs.io/ipfs/${imgTx}`,
-  //       vid : vidTx === "NOT_UPLOADED_YET" ? "aaf8n564dj8nwh19" : vidTx
-  //     })
-      
-  //   } catch (err) {
-     
-  //     console.log("Recommended to upload a Video ;)");
-  //   }
-  // }
- 
-  // useEffect(()=>{
-  //   if(owner){
-  //     getImgVideo(owner as string)
-  //   }
-  // },[])
-
   
   
   const [invest , setInvest] = React.useState<number>()
@@ -117,19 +89,7 @@ function ExpandExport() {
     watch: true,
   });
   
-//  const [balances , setBalances] = useState<any>({
-//   userBal : 0
-//  })
 
-//  async function getBals (){
-//     setBalances({
-//       userBal : userBal
-//     })
-//   }
-
-//   useEffect(() => {
-//     getBals()
-//   }, [])
 
   async function investStartup(val : number){
     try {
@@ -166,16 +126,14 @@ function ExpandExport() {
 
   return (
     <>
-    <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('../public/img/grad3.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
+    <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('/img/grad3.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
       <ToastContainer />
+      <Head>
+        <title>HatcheryDao</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
       
-      {/* <button
-          className="rounded-xl   bg-[#fff]  hover:shadow-xl  hover:scale-110 hover:shadow-purple-600 transition-all duration-200 ease-linear flex items-center justify-center py-0.5 px-2 ml-4 "
-          onClick={()=>getImgVideo(owner as string)}
-        >
-          <img src="img/refresh.png" alt="img" className="sm:w-8 w-6 mr-2" />{" "}
-          <span className="text-sm">Refresh</span>
-        </button> */}
       <div className="w-full flex items-center justify-center">
         {name && <div className="sm:w-2/4 w-4/5  h-5/6 bg-white/10  transition-all duration-300 ease-linear  backdrop-blur-md flex flex-col items-start justify-center rounded-xl font-jose relative mb-8  ">
           <img
@@ -210,7 +168,7 @@ function ExpandExport() {
 
           <div className="flex items-center justify-between gap-8 ">
             <span className="text-base mt-3 ml-4 text-white  ">
-              Seeking - <b className="font-bold text-xl">${amt}</b>
+              Seeking - <b className="font-bold text-xl">{amt} FIL</b>
             </span>
            
           </div>
@@ -263,7 +221,7 @@ function ExpandExport() {
                   handleInvest
                   }
                   className="text-black text-center text-sm border w-full border-zinc-300 px-4  rounded-sm h-8 "
-                  placeholder="$1-$Max"
+                  placeholder="1 FIL - $Max FIL"
                 />
 
                 

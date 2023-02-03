@@ -326,7 +326,7 @@ function EditPostExport() {
                 src={`img/back.png`}
                 alt="header"
                 className="w-6 ml-4 cursor-pointer"
-                // onClick={() => alert("i am touched")}
+              
               />
             </Link>
           </span>
@@ -342,7 +342,7 @@ function EditPostExport() {
           </span>
           {(activateEdit === "NAME" || activateEdit === "POST_NEW") && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+             
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <input
                   name="name"
@@ -368,7 +368,7 @@ function EditPostExport() {
 
           {(activateEdit === "TAGLINE" || activateEdit === "POST_NEW") && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+            
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <input
                   name="tagline"
@@ -393,7 +393,7 @@ function EditPostExport() {
 
           {(activateEdit === "AMOUNT" || activateEdit === "POST_NEW") && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+              
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <input
                   name="amount"
@@ -419,7 +419,7 @@ function EditPostExport() {
 
           {(activateEdit === "DESCRIPTION" || activateEdit === "POST_NEW") && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+             
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <textarea
                   name="descrip"
@@ -442,7 +442,7 @@ function EditPostExport() {
           )}
           {activateEdit === "IMAGE" && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+             
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <label
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -458,12 +458,7 @@ function EditPostExport() {
                   onChange={handleImage}
                 />
 
-                {/* <input
-                type="text"
-                onChange={handleImage}
-                className="text-black text-start text-sm border w-full border-zinc-300 px-8  rounded-sm h-8 "
-                placeholder="You Ban"
-              /> */}
+            
                 <button
                   onClick={() => changeImg(img)}
                   className="bg-[#2f1e6b] text-white py-1 px-4 w-3/4 mx-auto my-3 hover:scale-110 hover:shadow-xl hover:shadow-violet-800 rounded-xl transition-all duration-150 ease-linear"
@@ -475,7 +470,7 @@ function EditPostExport() {
           )}
           {activateEdit === "VIDEO" && (
             <>
-              {/* <span className=" text-lg mx-8 ">Name</span> */}
+             
               <div className=" z-30 py-3 flex flex-col flex-wrap items-start  gap-2 w-full px-8 ">
                 <label
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

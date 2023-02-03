@@ -12,6 +12,7 @@ import DataExForm from "../components/DataExForm";
   import { ToastContainer, toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 import { ethers } from "ethers";
+import Head from "next/head";
   
   interface IExData{
     name : string;
@@ -98,7 +99,12 @@ export default function DataExchange() {
   }
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden   relative bg-[url('../public/img/grad2.jpg')] bg-cover bg-no-repeat  overflow-hidden ">
+    <div className="w-full min-h-screen overflow-x-hidden   relative bg-[url('/img/grad2.jpg')] bg-cover bg-no-repeat  overflow-hidden ">
+      <Head>
+        <title>Data Exchange</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
       <ToastContainer />
       <DataExForm />
       <div  className="w-full p-20 sm:pt-24 md:p-20 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 auto-rows-max items-center z-10 h-screen gap-12 overflow-scroll scrollbar-hide">

@@ -12,6 +12,7 @@ import {
 } from "wagmi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 export default function OWNERS_ONLY() {
   const [sUri, setSUri] = React.useState<string>("");
@@ -223,11 +224,13 @@ export default function OWNERS_ONLY() {
   return (
     <>
       <div className=" bg-[#100a25] min-h-screen w-full pb-16 flex flex-col items-center justify-center gap-4">
+      <Head>
+        <title>HatcheryDao - OwnersOnly</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
         <ToastContainer />
-        {/* <h1 className="font-vt sm:text-6xl text-3xl mt-16 text-center px-8  text-white ">
-          Only Owners area
-         
-        </h1> */}
+    
         <div className="text-white gap-4 font-jose  mt-16 text-center px-8 flex flex-wrap items-center justify-center">
           <p className="text-xl sm:text-2xl">
             <b>HatcheryBal:</b>{" "}

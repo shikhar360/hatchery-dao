@@ -9,14 +9,13 @@ import { useHuddleStore } from "@huddle01/huddle01-client/store";
 import VideoWindow from "../components/VideoWindow";
 import PeerVideoAudioElem from "../components/PeerVideoAudioElem";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 function PitchDeck() {
   const huddleClient = getHuddleClient(process.env.NEXT_PUBLIC_HUDDLE as string);
   const peersKeys = useHuddleStore((state) => Object.keys(state.peers));
-  const lobbyPeers = useHuddleStore((state) => state.lobbyPeers);
-  const roomState = useHuddleStore((state) => state.roomState);
-  const recordingState = useHuddleStore((state) => state.recordingState);
-  const recordings = useHuddleStore((state) => state.recordings);
+ const roomState = useHuddleStore((state) => state.roomState);
+
 
   const router = useRouter()
   const {data} = router.query
@@ -40,7 +39,12 @@ function PitchDeck() {
 
   return (
     <HuddleClientProvider value={huddleClient}>
-      <div className=" w-full min-h-screen  flex  flex-col bg-[url('../public/img/grad3.jpg')]  bg-cover bg-no-repeat items-center gap-4 sm:pt-20 pt-40 justify-start  text-white scrollbar-hide">
+      <Head>
+        <title>Private Meeting</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
+      <div className=" w-full min-h-screen  flex  flex-col bg-[url('/img/grad3.jpg')]  bg-cover bg-no-repeat items-center gap-4 sm:pt-20 pt-40 justify-start  text-white scrollbar-hide">
 
       <h2 className={` py-1 px-4  rounded-md m-2 ${roomState.joined ? "bg-lime-500 text-black" : "bg-blue-500 text-white"} font-jose `}>
                  {roomState.joined ? "Enjoy Huddle-01" : "Waiting for Participant to Join"}
@@ -103,24 +107,7 @@ function PitchDeck() {
   <img src="img/unmute.png" className={`rounded-md  hover:shadow-md  hover:scale-110 hover:shadow-white transition-all duration-200 ease-linear flex items-center justify-center py-1.5 px-3 sm:my-3 my-1 mr-2  bg-stone-800 sm:w-14 w-10`}   onClick={() => huddleClient.unmuteMic()}/>
   
    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
        </div>
-
-       
-         
-
 
       </div>
     </HuddleClientProvider>

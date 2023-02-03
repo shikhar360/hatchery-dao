@@ -1,5 +1,6 @@
 import React, {useRef} from 'react'
 import Link from "next/link"
+import Head from 'next/head';
 import { CoreContractAddress, CoreContractAbi, HatcheryDaoAddress, HatcheryDaoAbi } from "../constants";
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -96,8 +97,13 @@ console.log(allStarts);
   },[])
 
   return (
-    <div className="  w-full h-screen  flex  flex-col bg-[url('../public/img/grad3.jpg')]  bg-cover bg-no-repeat items-center gap-4 pt-20 justify-start text-white scrollbar-hide ">
-
+    <div className="  w-full h-screen  flex  flex-col bg-[url('/img/grad3.jpg')]  bg-cover bg-no-repeat items-center gap-4 pt-24 justify-start text-white scrollbar-hide ">
+       
+       <Head>
+        <title>HatcheryDao - Startups</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
       <div className='w-full h-screen overflow-scroll overflow-x-hidden scrollbar-hide grid-cols-1 grid auto-rows-max content-start justify-center gap-4 '>
 
 

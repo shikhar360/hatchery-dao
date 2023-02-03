@@ -31,6 +31,7 @@ const livepeerClient = createReactClient({
   }),
 });
 import { HatcheryDaoAbi, HatcheryDaoAddress } from "../constants";
+import Head from "next/head";
 
 export default function PostStartup() {
   return (
@@ -148,7 +149,12 @@ function PostStartupExport() {
   useEffect(() => {}, []);
 
   return (
-    <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('../public/img/grad2.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
+    <div className=" w-full min-h-screen overflow-x-hidden flex  flex-col bg-[url('/img/grad2.jpg')]  bg-cover bg-no-repeat items-start gap-8 pt-20 justify-start  ">
+      <Head>
+        <title>Post Startups</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
       <ToastContainer />
       <div className="flex flex-wrap gap-2 ml-16">
         <Link
@@ -206,7 +212,7 @@ function PostStartupExport() {
                 src={`img/pencil.png`}
                 alt="header"
                 className="ml-8 w-4 cursor-pointer"
-                // onClick={() => alert("i am touched")}
+                
               />
             </Link>
           </div>
@@ -290,14 +296,11 @@ function PostStartupExport() {
               </Link>
             </span>
             <div className="w-full my-4 flex items-center justify-center">
-              {/* <video className="h-60 " autoPlay controls>
-                <source src="/img/video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video> */}
+              
               <Player
                 title={"Video"}
                 playbackId={imgVid.vid}
-                // src={url}
+                
                 autoPlay
                 muted
                 autoUrlUpload={{

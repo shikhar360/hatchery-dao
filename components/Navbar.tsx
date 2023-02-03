@@ -37,56 +37,58 @@ export default function Navbar() {
         
           <div className={` ${isActive ? "flex flex-col gap-2 items-center justify-center ":" hidden sm:flex sm:items-center sm:justify-end  sm:mr-auto gap-2 mx-auto text-xs md:text-sm lg:text-base"}`}>
 
-            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             <Link href={"/"}>
+            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
              Home
-            </Link>
             </p>
-            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            </Link>
             <Link href={{
-               pathname: "/Assets", 
-                
-              }}>
+              pathname: "/Assets", 
+              
+            }}>
+                <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
              Assets
-            </Link>
             </p>
-            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            </Link>
             <Link href={"/AllStartups"}>
-            AllStartups
-            </Link>
-            </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            AllStartups
+            </p>
+            </Link>
             <Link href={{pathname:"/PostStartup"
               //  query : {}
               }}>
+            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
             Post & Edit 
-            </Link>
             </p>
-            <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            </Link>
             <Link href={"/DataExchange"}>
-            Data Exchange
-            </Link>
-            </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+            Data Exchange
+            </p>
+            </Link>
+          
             <Link href={{
                pathname: "/PitchDeckPublic", 
               }}>
+                  <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
+
              Pitch Deck
+                  </p>
             </Link>
-            </p>
+            
           
           </div>
 
             <div className={` ${isActive ? "flex flex-col gap-2 my-4 ":" hidden sm:flex sm:items-center sm:justify-center  gap-2 my-auto md:pr-4 pr-6"}`}>
 
-            <p className="z-80 cursor-pointer bg-[#c176ff] hover:bg-[#ffad15] text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4  rounded-md text-center   ">
             <Link href={"/BuyNFT"}>
+            <p className="z-80 cursor-pointer bg-[#c176ff] hover:bg-[#ffad15] text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4  rounded-md text-center   ">
 
              Buy NFT
+            </p>
             </Link>
-            </p>
-            <p className="z-80 cursor-pointer hover:bg-[#9d4edd] hover:text-black transition-all duration-200 ease-linear bg-transparent   rounded-md text-center   ">
-            </p>
+           
             <ConnectKitButton/>
             </div>  
        

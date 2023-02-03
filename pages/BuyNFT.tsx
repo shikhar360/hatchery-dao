@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { ethers, utils } from "ethers";
+import Head from "next/head";
 
 export default function BuyNFT() {
   const [isStartupO, setIsStartupO] = React.useState<boolean | undefined>();
@@ -97,6 +98,11 @@ export default function BuyNFT() {
 
   return (
     <>
+    <Head>
+        <title>HatcheryDao NFTs</title>
+         <meta name="description" content="Created with <3 by Shikhar" />
+          <link rel="icon" href="/hatch.png" />
+      </Head>
       <ToastContainer />
       <section className=" bg-[#100a25] grid sm:grid-cols-2 grid-cols-1 items-start   justify-center min-h-screen w-full mx-auto ">
         <div className=" shadow-white shadow-xl hover:scale-105 hover:shadow-2xl hover:shadow-white transition-all duration-300 ease-linear bg-white w-3/5 flex flex-col items-center justify-center border-2 border-black border-dashed p-4 rounded-xl mx-auto my-20 font-jose rounded- ">
