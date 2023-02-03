@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ConnectKitButton } from "connectkit";
+import { useAccount } from "wagmi";
 
 
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
- 
+  const [addr, setAddr] = useState<string>('')
+  const { address, isConnected } = useAccount();
+
+  useEffect(() => {
+    if (isConnected){
+      setAddr(address as string)
+    }
+  }, [isConnected])
 
   return (
 
@@ -42,7 +50,10 @@ export default function Navbar() {
             </Link>
             </p>
             <p className="z-80 cursor-pointer hover:bg-[#c176ff] hover:text-black transition-all duration-200 ease-linear  bg-transparent  py-1 px-4 rounded-md text-center   ">
-            <Link href={"/Assets"}>
+            <Link href={{
+               pathname: "/Assets", 
+                query: { addr: addr }
+              }}>
              Assets
             </Link>
             </p>

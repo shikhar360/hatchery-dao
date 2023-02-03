@@ -225,7 +225,7 @@ function EditPostExport() {
       console.log(output.data.Hash);
       const hash = output.data.Hash;
       const tx = await core?.editImgLink(hash);
-      toast("Upoaidng to Blockchain");
+      toast("Uploading to Blockchain");
       await tx?.wait();
       toast.success("Image edited successfully");
     } catch (err) {

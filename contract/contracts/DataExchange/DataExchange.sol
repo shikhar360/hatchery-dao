@@ -34,7 +34,7 @@ contract Exchange {
    *@dev Buying the data with specific ID
    */ 
     function buyData ( uint256 _idx) external payable onlyStartupORInvestors {
-      require(msg.value == listingArr[_idx].amount * 10**18 , "Please Send correct AMOUNT");
+      require(msg.value == listingArr[_idx].amount , "Please Send correct AMOUNT");
 
        uint restAmount = msg.value - (msg.value * commissionRate/100);
       (bool callSuccess,) = payable(listingArr[_idx].dataOwner).call{value: restAmount}("");

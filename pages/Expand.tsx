@@ -69,7 +69,7 @@ function ExpandExport() {
     vid : ""
   })
  
-  console.log(imgVid);
+  // console.log(imgVid);
   // async function getImgVideo(addr : string) {
     
   //   try {

@@ -60,19 +60,21 @@ console.log(allStarts);
       let allStartups : Istarts[] = [];
 
       myStartupTx.forEach((itm : any) => {
-
-        allStartups.push({
-          name: itm.name,
-          description: itm.description,
-          tags: itm.tagline  ,
-          owner : itm.ownerAddress,
-          amt : itm.amount.toString(),
-          active : itm.isActive,
-          id : itm.sID.toString(),
-          votes : itm.upVoteCount.toString(),
-          imgHash : itm.imgHash,
-          vidHash : itm.videoHash
-        });
+        if (itm.isActive){
+          allStartups.push({
+            name: itm.name,
+            description: itm.description,
+            tags: itm.tagline  ,
+            owner : itm.ownerAddress,
+            amt : itm.amount.toString(),
+            active : itm.isActive,
+            id : itm.sID.toString(),
+            votes : itm.upVoteCount.toString(),
+            imgHash : itm.imgHash,
+            vidHash : itm.videoHash
+          });
+        }
+       
       });
      
       // getImgVideo(allStarts.owner);

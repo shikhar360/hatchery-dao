@@ -4,7 +4,7 @@
 #### Core contract deployed to: 
 - 0x01C3993802Fb76cfa1E7cBD8566f25CD79Da844D
 #### DataExchange contract deployed to:
-- 0x57327282668F9104312B11Cb0a811bA2909eeE5e
+- 0x82C50656Ef2De046f89dCB2ABB52Afa577A49029
 
 
 ## Function Checklist
