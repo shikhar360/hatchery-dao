@@ -77,6 +77,10 @@ function BoughtData({cid} : Icid) {
     setFileURL(url);
   }
 
+  function handleClick(){
+    window.open(fileURL)
+  }
+
   return (
     <div className="flex py-2 rounded-xl flex-col w-full bg-white/30 backdrop-blur-xl items-center justify-center  px-8">
 
@@ -86,7 +90,7 @@ function BoughtData({cid} : Icid) {
       <button  className="bg-[#070a14] text-white py-1 px-2  mx-auto  hover:scale-105 hover:shadow-md hover:shadow-[#100a25] rounded-md transition-all duration-150 ease-linear  text-center" onClick={()=>decrypt(cid)}>Decrypt</button>
       {
         fileURL?
-        <a  className="bg-[#070a14] text-white py-1 px-2  mx-auto  hover:scale-105 hover:shadow-md hover:shadow-[#100a25] rounded-md transition-all duration-150 ease-linear  text-center" href={fileURL} target="_blank">ViewFile</a>
+        <a  className="bg-[#070a14] text-white py-1 px-2  mx-auto  hover:scale-105 hover:shadow-md hover:shadow-[#100a25] rounded-md transition-all duration-150 ease-linear  text-center" href={fileURL} onClick={handleClick}>ViewFile</a>
         :
         null
       }

@@ -24,7 +24,7 @@ export default function Navbar() {
         
           <div
             className="z-80  px-6 flex items-center justify-center cursor-pointer transition-all duration-300 ease-linear p-1 rounded-full sm:hidden "
-            onClick={() => setIsActive(!isActive)}
+            onClick={() => setIsActive((prev : boolean) => !prev)}
           >
             {!isActive  ? (
               <img src="/img/menu.png" alt="menu" width={"38"} className={` duration-100 transition-all ease-linear`} />
