@@ -116,7 +116,7 @@ export default function DataExchange() {
     <img src={"/img/lock.jpg"} alt="header" className="sm:h-48 h-48 w-full  " />
     <div className="w-full flex flex-col px-3">
       <p className=" text-md font-semibold pt-3 truncate">{itm.name}</p>
-      <p className=" text-lg font-bold pt-1 ">{itm.amount / 10**18} tFIL</p>
+      <p className=" text-lg font-bold pt-1 ">{itm.amount / 10**18} FIL</p>
       <p className=" text-xs font-bold text-stone-200 pt-0.5 truncate">
         {itm.owner}
       </p>

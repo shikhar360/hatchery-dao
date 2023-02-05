@@ -122,7 +122,7 @@ export default function BuyNFT() {
                 onClick={() => buyStartupSBT()}
                 className={`mb-4 bg-gradient-to-br from-[#ff9900] to-[#fdcf00] py-2 px-4 rounded-xl hover:shadow-black shadow-black hover:scale-105 transition-all duration-300 ease-linear font-semibold`}
               >
-                Buy NOW : 0.1 ETH
+                Buy NOW : 0.1 FIL
               </button>
             )}
 
@@ -157,7 +157,7 @@ export default function BuyNFT() {
                 onClick={() => buyInvestorSBT()}
                 className={`mb-4 bg-gradient-to-br from-[#ff9900] to-[#fdcf00] py-2 px-4 rounded-xl hover:shadow-black shadow-black hover:scale-105 transition-all duration-300 ease-linear font-semibold`}
               >
-                Buy NOW : 0.2 ETH
+                Buy NOW : 0.2 FIL
               </button>
             )}
 
