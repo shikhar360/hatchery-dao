@@ -1,3 +1,10 @@
+
+https://user-images.githubusercontent.com/98407930/216965351-664b7258-9690-47d4-a740-878f24376250.mp4
+
+[Website's LINK](https://hatchery-dao.vercel.app/)
+
+[Youtube's LINK](https://youtu.be/BLiCtM5fUBs)
+
 # HatcheryDAO 🐣️
 HatcheryDAO is a **Token** gated  **Startup Incubator DAO** in which a STARTUP can post about his startup and can recieves fundings on it from all over the world . 
 
@@ -80,40 +87,49 @@ The DAO is created using the Next.js framework and the styling is done using Tai
 
    Lighthouse is used to to encrypt the file in the data exchange. Before any file is uploaded it is first getting encrypted using the Lighthouse browser encryption and then the hash of the file is getting stored on the smart contract . Users also have to decrypt the file in order to view it.
 
-     **Link to file where it is used**
+     [Line 59 ](https://github.com/shikhar360/hatchery-dao/blob/main/components/DataExForm.tsx)
 
    Not only in the Data exchange but it is also used to normal upload the image file on the startup post on the ipfs using the Light house 
  
-  **Link to file where it is used**
+  [Line 202 ](https://github.com/shikhar360/hatchery-dao/blob/main/pages/EditPost.tsx)
 
 - **Huddle01** ------------------------------------------
 
   Huddle is used to create public meeting for pitching your idea in the PitchDeck page , I have used I frame for setting up the group meeting.
 
-   **Link to file where it is used**
+   [Line 7](https://github.com/shikhar360/hatchery-dao/blob/main/pages/PitchDeckPublic.tsx)
 
    Also huddle is used in doing private video meetings with the startup owners , if they want before investion or clearing doubts.
 
-   **Link to file where it is used**
+  [Line 8](https://github.com/shikhar360/hatchery-dao/blob/main/pages/PitchDeck.tsx)
 
 - **Livepeer** ------------------------------------------   
   
   Livepeer is used to upload the video of startup post and getting the playbackID. The playback is then getting stored on the smart contract.
 
-  **Link to file where it is used**
+  [Line 36 & 300](https://github.com/shikhar360/hatchery-dao/blob/main/pages/PostStartup.tsx)
+  
+   [Line 240](https://github.com/shikhar360/hatchery-dao/blob/main/pages/EditPost.tsx)
+   
 
-  It is also used to play the video of the same in the expnd page which you can access by clicking *Allstartups/Expand*
+  It is also used to play the video of the same in the expand page which you can access by clicking *Allstartups/Expand*
 
-    **Link to file where it is used**
+   [Line 20 & 201](https://github.com/shikhar360/hatchery-dao/blob/main/pages/Expand.tsx)
 
 - **Spheron**------------------------------------------ 
 
-  The website's production is running on spheron network and custom root domain is used. 
+  The website's production is running on spheron network and custom root domain is used. (Custom Root Domain is not working for some reason)
+  
+  [Domain](https://hatcherydao.tech)
+  
+  [Spheron Link - https://hatchery-dao-b24fff.spheron.app](https://hatchery-dao-b24fff.spheron.app)
 
 - **Filecoin**------------------------------------------
 
-  The whole DAO is created and deployed on the filecoin ecosystem (hyperspace at the moment), it is currently supporting the filecoin ecosystem by boosting the transaction on the network , at the same time helping the early startups to raise funding and support by selling the importat Data
+  The whole DAO is created and deployed on the filecoin ecosystem (hyperspace at the moment), it is currently supporting the filecoin ecosystem by boosting the transaction on the network , at the same time helping the early startups to raise funding and support by selling the important Data
 
+     [Line 7](https://github.com/shikhar360/hatchery-dao/blob/main/contract/scripts/deploy.js)
+     
 - **Conectkit + Wagmi** -------------------------------------
   
   It is used for conneting our dapp to the web3 ecosystem, various functions like useAccount(), useContract(), useProvider(), useSigner(), useBalance() and many more have been used .
